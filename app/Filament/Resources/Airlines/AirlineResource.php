@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\Airports;
+namespace App\Filament\Resources\Airlines;
 
-use App\Filament\Resources\Airports\Pages\CreateAirport;
-use App\Filament\Resources\Airports\Pages\EditAirport;
-use App\Filament\Resources\Airports\Pages\ListAirports;
-use App\Filament\Resources\Airports\Schemas\AirportForm;
-use App\Filament\Resources\Airports\Tables\AirportsTable;
-use App\Models\Airport;
+use App\Filament\Resources\Airlines\Pages\CreateAirline;
+use App\Filament\Resources\Airlines\Pages\EditAirline;
+use App\Filament\Resources\Airlines\Pages\ListAirlines;
+use App\Filament\Resources\Airlines\Schemas\AirlineForm;
+use App\Filament\Resources\Airlines\Tables\AirlinesTable;
+use App\Models\Airline;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -16,20 +16,20 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class AirportResource extends Resource
+class AirlineResource extends Resource
 {
-    protected static ?string $model = Airport::class;
+    protected static ?string $model = Airline::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-s-building-office';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-s-paper-airplane';
 
     public static function form(Schema $schema): Schema
     {
-        return AirportForm::configure($schema);
+        return AirlineForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return AirportsTable::configure($table);
+        return AirlinesTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -42,9 +42,9 @@ class AirportResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListAirports::route('/'),
-            'create' => CreateAirport::route('/create'),
-            'edit' => EditAirport::route('/{record}/edit'),
+            'index' => ListAirlines::route('/'),
+            'create' => CreateAirline::route('/create'),
+            'edit' => EditAirline::route('/{record}/edit'),
         ];
     }
 

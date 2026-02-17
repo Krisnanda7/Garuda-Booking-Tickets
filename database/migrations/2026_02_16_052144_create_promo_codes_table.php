@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('discount');
             $table->dateTime('valid_until');
             $table->boolean('is_used')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
