@@ -45,9 +45,32 @@ class FlightForm
                         ]),
                     Step::make('Flight Class')
                         ->schema([
-                            // ...
+                            Repeater::make('flight_classes')
+                            ->relationship('classes')
+                                ->schema([
+                                    Select::make('class_type')
+                                        ->options([
+                                            'economy' => 'Economy',
+                                            'business' => 'Business',
+                                        ])
+                                        ->required(),
+                                    TextInput::make('price')
+                                        ->required()
+                                        ->prefix('IDR')
+                                        ->numeric()
+                                        ->minValue(0),
+                                    TextInput::make('total_seats')
+                                        ->required()
+                                        ->numeric()
+                                        ->minValue(1)
+                                        ->label('Total Seats'),
+                                    Select::make('facilities')
+                                        ->relationship('facilities', 'name')
+                                        ->multiple()
+                                        ->required(),
                         ]),
-                    ])->columnSpan(2),
-            ]);
+                    ]),
+            ])->columnSpan(2),
+        ]);
     }
 }

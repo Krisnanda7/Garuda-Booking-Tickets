@@ -11,7 +11,8 @@ class FlightSeat extends Model
     //
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'flight_class_id',
+        'flight_id',
+        'name',
         'row',
         'column',
         'class_type',

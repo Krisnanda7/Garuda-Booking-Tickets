@@ -20,4 +20,9 @@ class EditFlight extends EditRecord
             RestoreAction::make(),
         ];
     }
+
+    protected function afterSave() {
+        $flight = $this->record;
+        $flight->generateSeats();
+    }
 }

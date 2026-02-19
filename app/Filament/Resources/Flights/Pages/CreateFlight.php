@@ -8,4 +8,10 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateFlight extends CreateRecord
 {
     protected static string $resource = FlightResource::class;
+
+    protected function afterCreate(): void
+    {
+         $this->record->refresh();
+        $this->record->generateSeats();
+    }
 }
