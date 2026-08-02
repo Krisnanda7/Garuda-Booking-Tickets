@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Interfaces\FlightRepositoryInterface;
+use App\Models\Flight;
+use Override;
 
 class FlightRepository implements FlightRepositoryInterface
 {
@@ -32,5 +34,10 @@ class FlightRepository implements FlightRepositoryInterface
         }
 
         return $flights->get();
+    }
+
+    public function getFlightByFlightNumber($flightNumber)
+    {
+        return Flight::where('flight_number', $flightNumber)->first();
     }
 }
