@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Interfaces\FlightRepositoryInterface;
 use App\Models\Flight;
-use Override;
 
 class FlightRepository implements FlightRepositoryInterface
 {
