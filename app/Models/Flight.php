@@ -40,7 +40,8 @@ class Flight extends Model
         return $this->hasMany(Transaction::class);
     }
 
-    public function generateSeats() {
+    public function generateSeats()
+    {
 
         $classes = $this->classes;
 
@@ -52,7 +53,7 @@ class Flight extends Model
             $existingSeats = FlightSeat::where('flight_id', $this->id)
                 ->where('class_type', $class->class_type)
                 ->get();
-            
+
             $existingRows = $existingSeats->pluck('row')->toArray();
 
             $seatCounter = 1;
@@ -60,19 +61,19 @@ class Flight extends Model
             for ($row = 1; $row <= $rows; $row++) {
                 if (!in_array($row, $existingRows)) {
                     for ($column = 1; $column <= $seatsPerRow; $column++) {
-                        if($seatCounter > $totalSeats) {
-                            break; 
+                        if ($seatCounter > $totalSeats) {
+                            break;
                         }
 
                         $seatCode = $this->generateSeatCode($row, $column);
 
                         FlightSeat::create([
-                            'flight_id'=>$this->id,
-                            'name'=>$seatCode,   
-                            'row'=>$row,
-                            'column'=>$column,
-                            'is_available'=>true,
-                            'class_type'=>$class->class_type,
+                            'flight_id' => $this->id,
+                            'name' => $seatCode,
+                            'row' => $row,
+                            'column' => $column,
+                            'is_available' => true,
+                            'class_type' => $class->class_type,
                         ]);
 
                         $seatCounter++;
@@ -89,8 +90,9 @@ class Flight extends Model
         }
     }
 
-    protected function getSeatsPerRow($classType) {
-        Switch ($classType) {
+    protected function getSeatsPerRow($classType)
+    {
+        switch ($classType) {
             case 'business':
                 return 4;
             case 'economy':
@@ -100,9 +102,9 @@ class Flight extends Model
         }
     }
 
-    private function generateSeatCode($row, $column) {
+    private function generateSeatCode($row, $column)
+    {
         $rowLetter = chr(64 + $row);
         return $rowLetter . $column;
     }
 }
-
