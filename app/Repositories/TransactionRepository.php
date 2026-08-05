@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\TransactionRepositoryInterface;
 use App\Models\FlightClass;
+use App\Models\PromoCode;
 use App\Models\TransactionPassenger;
 
 class TransactionRepository implements TransactionRepositoryInterface
@@ -62,6 +63,13 @@ class TransactionRepository implements TransactionRepositoryInterface
 
     private function applyPromoCode($data)
     {
-        
+        $promo = PromoCode::where('code', $data['promo_code'])
+            ->where('valid_untill', '>=', now())
+            ->where('is_used', false)
+            ->first();
+
+        if ($promo) {
+            
+        }
     }
 }
