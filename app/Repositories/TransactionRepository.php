@@ -52,6 +52,11 @@ class TransactionRepository implements TransactionRepositoryInterface
 
     private function generateTransactionCode()
     {
+        return "BWAGARUDA" . rand(1000, 9999); // 4 digit random number
+    }
+
+    private function countPassengers($passengers)
+    {
         return count($passengers);
     }
 
@@ -91,6 +96,11 @@ class TransactionRepository implements TransactionRepositoryInterface
     }
 
     private function createTransaction($data)
+    {
+        return Transaction::create($data);
+    }
+    
+    private function savePassangers($data)
     {
         foreach ($passengers as $passenger) {
             $passenger['transaction_id'] = $transactionId;
