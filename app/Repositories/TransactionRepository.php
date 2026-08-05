@@ -69,7 +69,34 @@ class TransactionRepository implements TransactionRepositoryInterface
             ->first();
 
         if ($promo) {
-            
+            if ($promo->discoutn_type === 'percentage') {
+                $data['discount'] = $data['grandtotal'] * ($promo->dicount / 100);
+            } else {
+                $data['discount'] = $promo->discount;
+            }
+            $data['grandtotal'] -= $data['discount'];
+            $data['promo_code_id'] = $promo->id;
+
+            // tandai promo code sebagai sudah digunakan
+            $promo->update(['is_used' => true]);
+        }
+
+        return $data;
+    }
+
+    private function addPPN($grandTotal)
+    {
+        $ppn = $grandTotal * 0.11; // 11% PPN
+        return $grandTotal + $ppn;
+    }
+
+    private function createTransaction($data)
+    {
+        foreach ($passengers as $passenger) {
+            $passenger['transaction_id'] = $transactionId;
+            TransactionPassenger::create($passenger);
         }
     }
+
+    
 }
