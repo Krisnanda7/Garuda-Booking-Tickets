@@ -11,7 +11,7 @@ class TransactionRepository implements TransactionRepositoryInterface
 {
     public function getTransactionDataFromSession()
     {
-        return sessio()->get('transaction');
+        return session()->get('transaction');
     }
 
     public function saveTransactionDataToSession($data)
@@ -34,12 +34,12 @@ class TransactionRepository implements TransactionRepositoryInterface
         $data['grandtotal'] = $data['subtotal'];
 
         // Menerapkan promo jika ada
-        if(!empty($data['promo_code']) {
-            $data = $this->applyPromoCode($data);;
-        })
+        if(!empty($data['promo_code'])) {
+            $data = $this->applyPromoCode($data);
+        }
 
         // Tambahkan PPN 
-        $data['grandtotal'] = $this->addPPN($data['grandtotal'])
+        $data['grandtotal'] = $this->addPPN($data['grandtotal']);
 
         // simpan transaksi dan penumpang
         $transaction = $this->createTransaction($data);
@@ -65,7 +65,7 @@ class TransactionRepository implements TransactionRepositoryInterface
     //function untuk menghitung subtotal berdasarkan flight class id dan jumlah penumpang
     private function calculateSubtotal($flightClassId, $numberOfPassengers)
     {
-        $price = FlightClass::findOrFail($flightClassId)->pirce;
+        $price = FlightClass::findOrFail($flightClassId)->price;
         return $price * $numberOfPassengers;
     }
 
@@ -74,13 +74,13 @@ class TransactionRepository implements TransactionRepositoryInterface
     private function applyPromoCode($data)
     {
         $promo = PromoCode::where('code', $data['promo_code'])
-            ->where('valid_untill', '>=', now())
+            ->where('valid_until', '>=', now())
             ->where('is_used', false)
             ->first();
 
         if ($promo) {
-            if ($promo->discoutn_type === 'percentage') {
-                $data['discount'] = $data['grandtotal'] * ($promo->dicount / 100);
+            if ($promo->discount_type === 'percentage') {
+                $data['discount'] = $data['grandtotal'] * ($promo->discount / 100);
             } else {
                 $data['discount'] = $promo->discount;
             }
@@ -109,7 +109,7 @@ class TransactionRepository implements TransactionRepositoryInterface
     }
     
     // function untuk menyimpan data penumpang
-    private function savePassangers($data)
+    private function savePassengers($passengers, $transactionId)
     {
         foreach ($passengers as $passenger) {
             $passenger['transaction_id'] = $transactionId;
@@ -121,7 +121,7 @@ class TransactionRepository implements TransactionRepositoryInterface
     //artinya digunakan untuk verifikasi transaksi apakah transaksi itu ada atau tidak
     public function getTransactionByCode($code, $email, $phone)
     {
-        return Transaction::where('code', $code)->first()
+        return Transaction::where('code', $code)->first();
     }
 
     public function getTransactionByCodeEmailPhone($code, $email, $phone) 
