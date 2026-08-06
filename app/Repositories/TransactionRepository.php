@@ -117,7 +117,7 @@ class TransactionRepository implements TransactionRepositoryInterface
         }
     }
 
-    // function untuk get transaction data based on booking code
+    //function untuk get transaction data based on booking code
     //artinya digunakan untuk verifikasi transaksi apakah transaksi itu ada atau tidak
     public function getTransactionByCode($code, $email, $phone)
     {
