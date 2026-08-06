@@ -50,22 +50,27 @@ class TransactionRepository implements TransactionRepositoryInterface
         return $transaction;
     }
 
+    //function untuk membuat kode transaksi
     private function generateTransactionCode()
     {
         return "BWAGARUDA" . rand(1000, 9999); // 4 digit random number
     }
 
+    //function untuk menghitung penumpang
     private function countPassengers($passengers)
     {
         return count($passengers);
     }
 
+    //function untuk menghitung subtotal berdasarkan flight class id dan jumlah penumpang
     private function calculateSubtotal($flightClassId, $numberOfPassengers)
     {
         $price = FlightClass::findOrFail($flightClassId)->pirce;
         return $price * $numberOfPassengers;
     }
 
+
+    //function untuk menerapkan promo code
     private function applyPromoCode($data)
     {
         $promo = PromoCode::where('code', $data['promo_code'])
@@ -89,17 +94,21 @@ class TransactionRepository implements TransactionRepositoryInterface
         return $data;
     }
 
+    //function untuk menambahkan PPN 11%
     private function addPPN($grandTotal)
     {
         $ppn = $grandTotal * 0.11; // 11% PPN
         return $grandTotal + $ppn;
     }
 
+
+    //function untuk menyimpan transaksi ke database
     private function createTransaction($data)
     {
         return Transaction::create($data);
     }
     
+    // function untuk menyimpan data penumpang
     private function savePassangers($data)
     {
         foreach ($passengers as $passenger) {
@@ -108,6 +117,8 @@ class TransactionRepository implements TransactionRepositoryInterface
         }
     }
 
+    // function untuk get transaction data based on booking code
+    //artinya digunakan untuk verifikasi transaksi apakah transaksi itu ada atau tidak
     public function getTransactionByCode($code, $email, $phone)
     {
         return Transaction::where('code', $code)->first()
