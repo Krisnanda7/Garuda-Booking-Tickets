@@ -108,5 +108,16 @@ class TransactionRepository implements TransactionRepositoryInterface
         }
     }
 
-    
+    public function getTransactionByCode($code, $email, $phone)
+    {
+        return Transaction::where('code', $code)->first()
+    }
+
+    public function getTransactionByCodeEmailPhone($code, $email, $phone) 
+    {
+        return Transaction::where('code', $code)
+            ->where('email', $email)
+            ->where('phone', $phone)
+            ->first();
+    }
 }
