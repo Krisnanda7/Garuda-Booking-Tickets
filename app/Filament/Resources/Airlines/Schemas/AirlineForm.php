@@ -15,6 +15,7 @@ class AirlineForm
                 FileUpload::make('logo')
                     ->image()
                     ->directory('airlines')
+                    ->disk('public')
                     ->columnSpan(2)
                     ->required(),
                 TextInput::make('code')

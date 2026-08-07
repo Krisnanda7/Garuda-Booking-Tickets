@@ -16,6 +16,7 @@ class FacilityForm
                 FileUpload::make('image')
                     ->image()
                     ->directory('facilities')
+                    ->disk('public')
                     ->columnSpan(2)
                     ->required(),
                 TextInput::make('name')
