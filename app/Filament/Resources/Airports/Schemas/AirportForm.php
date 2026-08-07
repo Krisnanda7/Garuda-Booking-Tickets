@@ -15,6 +15,7 @@ class AirportForm
                 FileUpload::make('image')
                     ->image()
                     ->directory('airports')
+                    ->disk('public')
                     ->columnSpan(2)
                     ->required(),
                 TextInput::make('iata_code')
