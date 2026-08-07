@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
-@section('content')
+@section('include')
 <div id="Background-home" class="absolute w-full h-full top-0 bg-white">
     <div class="absolute top-0 w-full h-[1020px] bg-[linear-gradient(180deg,#85C8FF_0%,#D4D1FE_47.05%,#F5F6FB_77.08%,#FFFFFF_100%)]">
         <img src="assets/images/backgrounds/Jumbo Jet Sky (1) 1.png" class="absolute right-0 top-[147px] object-contain max-h-[481px]" alt="background image">
     </div>
 </div>
 
+@section('content')
 <div id="Hero-Text" class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto gap-[30px] mt-[86px]">
     <div class="Badge flex items-center w-fit rounded-full p-[8px_14px] gap-[10px] bg-white">
         <img src="assets/images/icons/crown-black.svg" class="w-5 h-5 flex shrink-0" alt="icon">

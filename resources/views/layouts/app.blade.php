@@ -11,7 +11,13 @@
 </head>
 
 <body>
+    <!-- yield untuk navbar -->
+    @yield('include')
+
+    <!-- navbar -->
     @include('includes.navbar')
+
+    <!-- yield untuk content -->
     @yield('content')
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/index.js"></script>
