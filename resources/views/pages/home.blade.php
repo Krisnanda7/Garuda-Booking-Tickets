@@ -26,17 +26,17 @@
                         <img src="assets/images/icons/departure.svg" class="w-[50px] flex shrink-0" alt="icon">
                         <div class="text-left">
                             <p class="text-sm text-garuda-grey">Departure</p>
-                            <p id="Departure-Label" class="font-semibold text-lg mt-[2px] text-nowrap">Jakarta (CGK)</p>
+                            <p id="Departure-Label" class="font-semibold text-lg mt-[2px] text-nowrap">Select Departure</p>
                         </div>
                     </button>
                     <div id="Departure-Dropdown" class="dropdown-content hidden absolute z-10 top-full mt-4 h-[232px] rounded-[18px] bg-white border border-[#E8EFF7] overflow-y-scroll custom-scrollbar">
                         <div class="flex flex-col justify-center w-[483px] p-5 gap-4 shrink-0">
                             @foreach ($airports as $airport)
                             <label class="relative flex items-center rounded-[10px] gap-[10px] p-0 has-[:checked]:p-[10px] has-[:checked]:bg-garuda-bg-grey transition-all duration-300">
-                                <input type="radio" name="departure" id="" class="absolute top-1/2 left-1/2 opacity-0">
+                                <input type="radio" name="departure" id="{{$airport->iata_code }}" class="absolute top-1/2 left-1/2 opacity-0">
                                 <img src="assets/images/icons/airplane-black.svg" class="flex shrink-0 w-[34px]" alt="icon">
                                 <div class="flex flex-col gap-[2px]">
-                                    <p class="font-semibold">{{$airport->name}}</p>
+                                    <p class="font-semibold">{{$airport->name}} ({{$airport->iata_code}})</p>
                                     <p class="text-sm text-garuda-grey">{{$airport->city}}</p>
                                 </div>
                             </label>
@@ -49,40 +49,28 @@
                         <img src="assets/images/icons/departure.svg" class="w-[50px] flex shrink-0" alt="icon">
                         <div class="text-left">
                             <p class="text-sm text-garuda-grey">Arrival</p>
-                            <p id="Arrival-Label" class="font-semibold text-lg mt-[2px] text-nowrap">Tokyo (HND)</p>
+                            <p id="Arrival-Label" class="font-semibold text-lg mt-[2px] text-nowrap"> Select Arrival </p>
                         </div>
                     </button>
+
+                    <!-- Arrival Dropdown -->
                     <div id="Arrival-Dropdown" class="dropdown-content hidden absolute z-10 top-full mt-4 h-[232px] rounded-[18px] bg-white border border-[#E8EFF7] overflow-y-scroll custom-scrollbar">
                         <div class="flex flex-col justify-center w-[483px] p-5 gap-4 shrink-0">
+                            @foreach ($airports as $airport)
                             <label class="relative flex items-center rounded-[10px] gap-[10px] p-0 has-[:checked]:p-[10px] has-[:checked]:bg-garuda-bg-grey transition-all duration-300">
-                                <input type="radio" name="arrival-radio" id="" class="absolute top-1/2 left-1/2 opacity-0">
+                                <input type="radio" name="arrival" id="{{$airport->iata_code }}" class="absolute top-1/2 left-1/2 opacity-0">
                                 <img src="assets/images/icons/airplane-black.svg" class="flex shrink-0 w-[34px]" alt="icon">
                                 <div class="flex flex-col gap-[2px]">
-                                    <p class="font-semibold">Angga Capital Airport</p>
-                                    <p class="text-sm text-garuda-grey">Bandung, Indonesia</p>
+                                    <p class="font-semibold">{{$airport->name}} ({{$airport->iata_code}})</p>
+                                    <p class="text-sm text-garuda-grey">{{$airport->city}}</p>
                                 </div>
                             </label>
-                            <hr class="border-[#E8EFF7]">
-                            <label class="relative flex items-center rounded-[10px] gap-[10px] p-0 has-[:checked]:p-[10px] has-[:checked]:bg-garuda-bg-grey transition-all duration-300">
-                                <input type="radio" name="arrival-radio" id="" class="absolute top-1/2 left-1/2 opacity-0">
-                                <img src="assets/images/icons/airplane-black.svg" class="flex shrink-0 w-[34px]" alt="icon">
-                                <div class="flex flex-col gap-[2px]">
-                                    <p class="font-semibold">Angga Capital Airport</p>
-                                    <p class="text-sm text-garuda-grey">Bandung, Indonesia</p>
-                                </div>
-                            </label>
-                            <hr class="border-[#E8EFF7]">
-                            <label class="relative flex items-center rounded-[10px] gap-[10px] p-0 has-[:checked]:p-[10px] has-[:checked]:bg-garuda-bg-grey transition-all duration-300">
-                                <input type="radio" name="arrival-radio" id="" class="absolute top-1/2 left-1/2 opacity-0">
-                                <img src="assets/images/icons/airplane-black.svg" class="flex shrink-0 w-[34px]" alt="icon">
-                                <div class="flex flex-col gap-[2px]">
-                                    <p class="font-semibold">Angga Capital Airport</p>
-                                    <p class="text-sm text-garuda-grey">Bandung, Indonesia</p>
-                                </div>
-                            </label>
+                            @endforeach
                         </div>
                     </div>
                 </div>
+
+                <!-- Date Dropdown -->
                 <div id="Date" class="dropdown-container relative flex items-center h-full border-r border-[#E8EFF7] last:border-r-0">
                     <input type="date" name="date" id="date" class="absolute top-1/2 -z-10">
                     <button type="button" id="Date-Button" class="relative flex items-center gap-4 p-5 first:pl-6 last:pr-6">
@@ -93,6 +81,8 @@
                         </div>
                     </button>
                 </div>
+
+                <!-- Quantity Dropdown -->
                 <div id="Quantity" class="dropdown-container relative flex items-center h-full border-r border-[#E8EFF7] last:border-r-0">
                     <button type="button" class="dropdown flex items-center gap-4 p-5 first:pl-6 last:pr-6" data-dropdown-target="#Quantity-Dropdown">
                         <img src="assets/images/icons/departure.svg" class="w-[50px] flex shrink-0" alt="icon">
