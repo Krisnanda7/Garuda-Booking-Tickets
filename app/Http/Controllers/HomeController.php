@@ -18,7 +18,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $airports = $this->$airportRepository->getAllAirports();
+        $airports = $this->airportRepository->getAllAirports();
 
         return view('pages.home', compact('airports'));
     }

@@ -33,11 +33,11 @@
                         <div class="flex flex-col justify-center w-[483px] p-5 gap-4 shrink-0">
                             @foreach ($airports as $airport)
                             <label class="relative flex items-center rounded-[10px] gap-[10px] p-0 has-[:checked]:p-[10px] has-[:checked]:bg-garuda-bg-grey transition-all duration-300">
-                                <input type="radio" name="departure-radio" id="" class="absolute top-1/2 left-1/2 opacity-0">
+                                <input type="radio" name="departure" id="" class="absolute top-1/2 left-1/2 opacity-0">
                                 <img src="assets/images/icons/airplane-black.svg" class="flex shrink-0 w-[34px]" alt="icon">
                                 <div class="flex flex-col gap-[2px]">
                                     <p class="font-semibold">{{$airport->name}}</p>
-                                    <p class="text-sm text-garuda-grey">{ {$airport->city}}, {{ $airport->country }}</p>
+                                    <p class="text-sm text-garuda-grey">{{$airport->city}}</p>
                                 </div>
                             </label>
                             @endforeach
