@@ -122,8 +122,8 @@
 
     <!-- swiper card popular destination -->
     <div class="swiper !w-full overflow-x-hidden">
-        @foreach ($airports as $airport)
         <div class="swiper-wrapper">
+            @foreach ($airports as $airport)
             <div class="swiper-slide !w-fit first:ml-[calc(((100%-1280px)/2)+75px-24px)]">
                 <a href="#" class="card">
                     <div class="flex items-end w-[230px] h-[280px] shrink-0 rounded-[30px] bg-white overflow-hidden hover:border-2 hover:border-garuda-blue hover:p-[10px] transition-all duration-300">
@@ -139,8 +139,8 @@
                     </div>
                 </a>
             </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
 </section>
 @endsection
