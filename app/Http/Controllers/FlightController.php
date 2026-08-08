@@ -23,11 +23,13 @@ class FlightController extends Controller
     public function index(Request $request)
     {
         $flights = $this->flightRepository->gettALLFlights([
-            'departure' => $departure->id ?? null,
+            'departure' => $departure->id ?? null, 
             'arrival' => $arrival->id ?? null,
             'date' => $request->date ?? null,
         ]);
 
-        return view('pages.flight.index', compact('flights'));
+        $airline = $this->airlineRepository->getAllAirlines();
+
+        return view('pages.flight.index', compact('flights', 'airline'));
     }
 }

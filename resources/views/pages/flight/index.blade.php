@@ -46,42 +46,17 @@
                 <hr class="border-[#E8EFF7]">
                 <div id="Airlines" class="flex flex-col gap-4">
                     <p class="font-semibold">Airlines</p>
-                    <label class="flex items-center gap-[10px]">
-                        <input type="checkbox" name="airlines" id=""
-                            class="flex w-6 h-6 shrink-0 appearance-none outline-none rounded-lg ring-1 ring-garuda-black border border-white checked:bg-black checked:border-[5px]">
-                        <img src="assets/images/logos/ana.svg" alt="logo">
-                        <div class="flex flex-col gap-[2px]">
-                            <span class="font-semibold">Angga Air</span>
-                            <span class="text-sm text-garuda-grey">Available</span>
-                        </div>
-                    </label>
-                    <label class="flex items-center gap-[10px]">
-                        <input type="checkbox" name="airlines" id=""
-                            class="flex w-6 h-6 shrink-0 appearance-none outline-none rounded-lg ring-1 ring-garuda-black border border-white checked:bg-black checked:border-[5px]">
-                        <img src="assets/images/logos/emirates.svg" alt="logo">
-                        <div class="flex flex-col gap-[2px]">
-                            <span class="font-semibold">Emirate Fly</span>
-                            <span class="text-sm text-garuda-grey">Available</span>
-                        </div>
-                    </label>
-                    <label class="flex items-center gap-[10px]">
-                        <input type="checkbox" name="airlines" id=""
-                            class="flex w-6 h-6 shrink-0 appearance-none outline-none rounded-lg ring-1 ring-garuda-black border border-white checked:bg-black checked:border-[5px]">
-                        <img src="assets/images/logos/singapore-airlines.svg" alt="logo">
-                        <div class="flex flex-col gap-[2px]">
-                            <span class="font-semibold">Xinjiapo Air</span>
-                            <span class="text-sm text-garuda-grey">Available</span>
-                        </div>
-                    </label>
-                    <label class="flex items-center gap-[10px]">
-                        <input type="checkbox" name="airlines" id=""
-                            class="flex w-6 h-6 shrink-0 appearance-none outline-none rounded-lg ring-1 ring-garuda-black border border-white checked:bg-black checked:border-[5px]">
-                        <img src="assets/images/logos/ana.svg" alt="logo">
-                        <div class="flex flex-col gap-[2px]">
-                            <span class="font-semibold">Anamika Fly</span>
-                            <span class="text-sm text-garuda-grey">Available</span>
-                        </div>
-                    </label>
+                    @foreach ($airlines as $airline)
+                        <label class="flex items-center gap-[10px]">
+                            <input type="checkbox" name="airlines" id=""
+                                class="flex w-6 h-6 shrink-0 appearance-none outline-none rounded-lg ring-1 ring-garuda-black border border-white checked:bg-black checked:border-[5px]">
+                            <img src="assets/images/logos/ana.svg" alt="logo">
+                            <div class="flex flex-col gap-[2px]">
+                                <span class="font-semibold">{{ $airline->name }}</span>
+                                <span class="text-sm text-garuda-grey">Available</span>
+                            </div>
+                        </label>
+                    @endforeach
                 </div>
                 <hr class="border-[#E8EFF7]">
                 <div id="Facilities" class="flex flex-col gap-4">
