@@ -44,13 +44,15 @@
                     </label>
                 </div>
                 <hr class="border-[#E8EFF7]">
+
+                {{-- Aislines Filter --}}
                 <div id="Airlines" class="flex flex-col gap-4">
                     <p class="font-semibold">Airlines</p>
-                    @foreach ($airlines as $airline)
+                    @foreach ($airline as $airline)
                         <label class="flex items-center gap-[10px]">
-                            <input type="checkbox" name="airlines" id=""
+                            <input type="checkbox" name="airlines" value={{ $airline->id }} id=""
                                 class="flex w-6 h-6 shrink-0 appearance-none outline-none rounded-lg ring-1 ring-garuda-black border border-white checked:bg-black checked:border-[5px]">
-                            <img src="assets/images/logos/ana.svg" alt="logo">
+                            <img src="{{ asset('storage/' . $airline->logo) }}" alt="logo" width="50">
                             <div class="flex flex-col gap-[2px]">
                                 <span class="font-semibold">{{ $airline->name }}</span>
                                 <span class="text-sm text-garuda-grey">Available</span>
