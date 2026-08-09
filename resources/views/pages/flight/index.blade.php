@@ -4,22 +4,36 @@
     <main class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[50px] mb-[62px]">
         <h1 class="font-extrabold text-[50px] leading-[75px]">Flight Search</h1>
         <div class="flex w-fit rounded-[20px] p-5 gap-[30px] bg-white mt-5">
-            <div class="flex flex-col gap-[2px]">
-                <p class="text-sm text-garuda-grey">Departure</p>
-                <p class="font-semibold text-lg">Jakarta (CGK)</p>
-            </div>
-            <div class="flex flex-col gap-[2px]">
-                <p class="text-sm text-garuda-grey">Arrival</p>
-                <p class="font-semibold text-lg">Tokyo (HND)</p>
-            </div>
-            <div class="flex flex-col gap-[2px]">
-                <p class="text-sm text-garuda-grey">Date</p>
-                <p class="font-semibold text-lg">15 Sep 2024</p>
-            </div>
-            <div class="flex flex-col gap-[2px]">
-                <p class="text-sm text-garuda-grey">Quantity</p>
-                <p class="font-semibold text-lg">3 people</p>
-            </div>
+            {{-- departure filter --}}
+            @if (request()->departure)
+                <div class="flex flex-col gap-[2px]">
+                    <p class="text-sm text-garuda-grey">Departure</p>
+                    <p class="font-semibold text-lg">{{ request()->departure }}</p>
+                </div>
+            @endif
+
+            {{-- arrival filter --}}
+            @if (request()->arrival)
+                <div class="flex flex-col gap-[2px]">
+                    <p class="text-sm text-garuda-grey">Arrival</p>
+                    <p class="font-semibold text-lg">{{ request()->arrival }}</p>
+                </div>
+            @endif
+
+            {{-- date filter --}}
+            @if (request()->date)
+                <div class="flex flex-col gap-[2px]">
+                    <p class="text-sm text-garuda-grey">Date</p>
+                    <p class="font-semibold text-lg">{{ request()->date }}</p>
+                </div>
+            @endif
+
+            {{-- quantity filter --}}
+            @if (request()->quantity)
+                <div class="flex flex-col gap-[2px]">
+                    <p class="text-sm text-garuda-grey">Quantity</p>
+                    <p class="font-semibold text-lg">3 people</p>
+                </div>
         </div>
         <div class="flex gap-[26px] mt-[30px]">
             <form id="Filter" action="#"
