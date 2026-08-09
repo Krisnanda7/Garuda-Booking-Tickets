@@ -262,10 +262,10 @@
                             <label class="accordion-trigger flex items-center justify-between">
                                 <input type="checkbox" name="accordion-input" class="hidden" checked>
                                 <div class="flex items-center gap-[10px]">
-                                    <img src="assets/images/logos/singapore-airlines.svg"
+                                    <img src="{{ asset('storage/' . $flight->airline->logo) }}"
                                         class="w-[60px] h-[60px] flex shrink-0" alt="logo">
                                     <div>
-                                        <p class="font-semibold">Xinjiapo Air</p>
+                                        <p class="font-semibold">{{ $flight->airline->name }}</p>
                                         <p class="text-sm text-garuda-grey mt-[2px]">08:30 - 12:00</p>
                                     </div>
                                 </div>
