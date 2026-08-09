@@ -115,11 +115,11 @@
             </form>
 
 
-            {{-- Transaksi 2 Direct --}}
             <div id="Result" class="flex flex-col w-full h-fit rounded-3xl p-5 gap-5 bg-white">
                 <h2 class="font-bold text-xl leading-[30px]">Available Flights</h2>
                 @foreach ($flights as $flight)
                     @if ($flight->segments->count() > 2)
+                        {{-- TRANSIT CARD - START --}}
                         <div
                             class="transit-card accordion flex flex-col w-full rounded-[20px] border border-garuda-blue py-5 px-6 gap-5 overflow-hidden has-[:checked]:!h-[110px] has-[:checked]:border-[#E8EFF7] hover:!border-garuda-blue transition-all duration-300">
                             <label class="accordion-trigger flex items-center justify-between">
@@ -257,6 +257,7 @@
                             </div>
                         </div>
                     @else
+                        {{-- DIRECT CARD --}}
                         <div
                             class="direct-card accordion flex flex-col w-full rounded-[20px] border border-garuda-blue py-5 px-6 gap-5 overflow-hidden has-[:checked]:!h-[110px] has-[:checked]:border-[#E8EFF7] hover:!border-garuda-blue transition-all duration-300">
                             <label class="accordion-trigger flex items-center justify-between">
