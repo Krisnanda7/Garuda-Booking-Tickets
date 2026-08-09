@@ -266,19 +266,24 @@
                                         class="w-[60px] h-[60px] flex shrink-0" alt="logo">
                                     <div>
                                         <p class="font-semibold">{{ $flight->airline->name }}</p>
-                                        <p class="text-sm text-garuda-grey mt-[2px]">08:30 - 12:00</p>
+                                        <p class="text-sm text-garuda-grey mt-[2px]">
+                                            {{ $flight->segments->first()->time->format('H:i') }} -
+                                            {{ $flight->segments->last()->time->format('H:i') }}</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col gap-[2px] items-center justify-center">
-                                    <p class="text-sm text-garuda-grey">3 hours</p>
+                                    <p class="text-sm text-garuda-grey">
+                                        {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
+                                        Hours</p>
                                     <div class="flex items-center gap-[6px]">
-                                        <p class="font-semibold">CGK</p>
+                                        <p class="font-semibold">{{ $flight->segments->first()->airport->iata_code }}</p>
                                         <img src="assets/images/icons/direct-black.svg" alt="icon">
-                                        <p class="font-semibold">HND</p>
+                                        <p class="font-semibold">{{ $flight->segments->last()->airport->iata_code }}</p>
                                     </div>
                                     <p class="text-sm text-garuda-grey">Direct</p>
                                 </div>
-                                <p class="min-w-[120px] font-semibold text-garuda-green text-center">Rp 24.560.341</p>
+                                <p class="min-w-[120px] font-semibold text-garuda-green text-center">
+                                    {{ 'Rp ' . number_format($flight->classes->first()->price, 0, ',', '.') }}</p>
                                 <a href="choose-tiers.html"
                                     class="rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
                                     <span class="font-semibold text-white">Choose</span>
