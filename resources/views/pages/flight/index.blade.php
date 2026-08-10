@@ -159,27 +159,40 @@
                                 <div class="left-content flex flex-col gap-[10px]">
                                     <div class="departure flex items-center gap-5">
                                         <div class="text-center w-[83px]">
-                                            <p class="font-semibold">08:30</p>
-                                            <p class="text-sm text-garuda-grey mt-[2px]">15 Sep 2024</p>
+                                            <p class="font-semibold">
+                                                {{ $flight->segments->first()->time->format('H:i') }}
+                                            </p>
+                                            <p class="text-sm text-garuda-grey mt-[2px]">
+                                                {{ $flight->segments->first()->time->format('d M Y') }}</p>
                                         </div>
                                         <div class="flex items-center gap-4">
                                             <img src="assets/images/icons/departure.svg"
                                                 class="w-[50px] h-[50px] flex shrink-0" alt="icon">
                                             <div>
                                                 <p class="text-sm text-garuda-grey mt-[2px]">Departure</p>
-                                                <p class="font-semibold">Jakarta (CGK)</p>
+                                                <p class="font-semibold">
+                                                    {{ $flight->segments->first()->airport->name }}
+                                                    ({{ $flight->segments->first()->airport->iata_code }})
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="time flex flex-col items-center w-[83px]">
                                         <div class="h-8 border border-garuda-black border-dashed"></div>
-                                        <p class="text-xs leading-[18px] text-garuda-grey">3 hours</p>
+                                        <p class="text-xs leading-[18px] text-garuda-grey">
+                                            {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
+                                            hours
+                                        </p>
                                         <div class="h-8 border border-garuda-black border-dashed"></div>
                                     </div>
                                     <div class="transit flex items-center gap-5">
                                         <div class="text-center w-[83px]">
-                                            <p class="font-semibold">12:00</p>
-                                            <p class="text-sm text-garuda-grey mt-[2px]">15 Sep 2024</p>
+                                            <p class="font-semibold">
+                                                {{ $flight->segments->skip(1)->first()->time->format('H:i') }}
+                                            </p>
+                                            <p class="text-sm text-garuda-grey mt-[2px]">
+                                                {{ $flight->segments->skip(1)->first()->time->format('d M Y') }}
+                                            </p>
                                         </div>
                                         <div class="flex items-center gap-4">
                                             <img src="assets/images/icons/transit-round-black.svg"
@@ -306,7 +319,7 @@
                                                 {{ $flight->segments->first()->time->format('H:i') }}
                                             </p>
                                             <p class="text-sm text-garuda-grey mt-[2px]">
-                                                {{ $flight->segments->last()->time->format('d M Y') }}
+                                                {{ $flight->segments->first()->time->format('d M Y') }}
                                             </p>
                                         </div>
                                         <div class="flex items-center gap-4">
