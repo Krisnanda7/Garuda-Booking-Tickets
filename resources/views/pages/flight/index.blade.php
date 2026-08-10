@@ -228,7 +228,10 @@
                                                 class="w-[50px] h-[50px] flex shrink-0" alt="icon">
                                             <div>
                                                 <p class="text-sm text-garuda-grey mt-[2px]">Arrival</p>
-                                                <p class="font-semibold">Tokyo (HND)</p>
+                                                <p class="font-semibold">
+                                                    {{ $flight->segments->last()->airport->name }}
+                                                    ({{ $flight->segments->last()->airport->iata_code }})
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
