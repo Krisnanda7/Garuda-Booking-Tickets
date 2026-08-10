@@ -119,29 +119,35 @@
                 <h2 class="font-bold text-xl leading-[30px]">Available Flights</h2>
                 @foreach ($flights as $flight)
                     @if ($flight->segments->count() > 2)
-                        {{-- TRANSIT CARD - START --}}
+                        {{-- TRANSIT CARD --}}
                         <div
                             class="transit-card accordion flex flex-col w-full rounded-[20px] border border-garuda-blue py-5 px-6 gap-5 overflow-hidden has-[:checked]:!h-[110px] has-[:checked]:border-[#E8EFF7] hover:!border-garuda-blue transition-all duration-300">
                             <label class="accordion-trigger flex items-center justify-between">
                                 <input type="checkbox" name="accordion-input" class="hidden" checked>
                                 <div class="flex items-center gap-[10px]">
-                                    <img src="assets/images/logos/ana.svg" class="w-[60px] h-[60px] flex shrink-0"
-                                        alt="logo">
+                                    <img src="{{ asset('storage/' . $flight->airline->logo) }}"
+                                        class="w-[60px] h-[60px] flex shrink-0" alt="logo">
                                     <div>
-                                        <p class="font-semibold">Angga Air</p>
-                                        <p class="text-sm text-garuda-grey mt-[2px]">08:30 - 12:00</p>
+                                        <p class="font-semibold">{{ $flight->airline->name }}</p>
+                                        <p class="text-sm text-garuda-grey mt-[2px]">
+                                            {{ $flight->segments->first()->time->format('H:i') }} -
+                                            {{ $flight->segments->last()->time->format('H:i') }}
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col gap-[2px] items-center justify-center">
-                                    <p class="text-sm text-garuda-grey">12 hours</p>
+                                    <p class="text-sm text-garuda-grey">
+                                        {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
+                                        hours
+                                    </p>
                                     <div class="flex items-center gap-[6px]">
-                                        <p class="font-semibold">CGK</p>
+                                        <p class="font-semibold">{{ $flight->segments->first()->airport->iata_code }}</p>
                                         <img src="assets/images/icons/transit-black.svg" alt="icon">
-                                        <p class="font-semibold">HND</p>
+                                        <p class="font-semibold">{{ $flight->segments->last()->airport->iata_code }}</p>
                                     </div>
                                     <p class="text-sm text-garuda-grey">Transit 1x</p>
                                 </div>
-                                <p class="min-w-[120px] font-semibold text-garuda-green text-center">Rp 4.560.341</p>
+                                <p class="min-w-[120px] font-semibold text-garuda-green text-center">{}</p>
                                 <a href="choose-tiers.html"
                                     class="rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
                                     <span class="font-semibold text-white">Choose</span>
@@ -347,54 +353,19 @@
                                 </div>
                                 <div
                                     class="grid grid-cols-2 w-[320px] shrink-0 h-fit p-5 gap-y-6 justify-between rounded-[30px] bg-garuda-bg-grey">
-                                    <div class="flex items-center gap-3 even:w-[139px] shrink-0">
-                                        <img src="assets/images/icons/box-black.svg" class="w-6 h-6 flex shrink-0"
-                                            alt="icon">
-                                        <div>
-                                            <p class="font-semibold text-sm">Baggages</p>
-                                            <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3 even:w-[139px] shrink-0">
-                                        <img src="assets/images/icons/video-play-black.svg" class="w-6 h-6 flex shrink-0"
-                                            alt="icon">
-                                        <div>
-                                            <p class="font-semibold text-sm">Entertainment</p>
-                                            <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3 even:w-[139px] shrink-0">
-                                        <img src="assets/images/icons/electricity-black.svg" class="w-6 h-6 flex shrink-0"
-                                            alt="icon">
-                                        <div>
-                                            <p class="font-semibold text-sm">USB C Port</p>
-                                            <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3 even:w-[139px] shrink-0">
-                                        <img src="assets/images/icons/coffee-black.svg" class="w-6 h-6 flex shrink-0"
-                                            alt="icon">
-                                        <div>
-                                            <p class="font-semibold text-sm">Heavy Meals</p>
-                                            <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3 even:w-[139px] shrink-0">
-                                        <img src="assets/images/icons/security-user-black.svg"
-                                            class="w-6 h-6 flex shrink-0" alt="icon">
-                                        <div>
-                                            <p class="font-semibold text-sm">Lifeguard</p>
-                                            <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3 even:w-[139px] shrink-0">
-                                        <img src="assets/images/icons/wifi-black.svg" class="w-6 h-6 flex shrink-0"
-                                            alt="icon">
-                                        <div>
-                                            <p class="font-semibold text-sm">Wi-fi Onboard</p>
-                                            <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
-                                        </div>
-                                    </div>
+                                    @foreach ($flight->classes as $class)
+                                        @foreach ($class->facilities as $facility)
+                                            <div class="flex items-center gap-3 even:w-[139px] shrink-0">
+                                                <img src="{{ asset('storage/' . $facility->image) }}"
+                                                    class="w-6 h-6 flex shrink-0" alt="icon">
+                                                <div>
+                                                    <p class="font-semibold text-sm">{{ $facility->name }}</p>
+                                                    <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endforeach
+
                                 </div>
                             </div>
                         </div>
