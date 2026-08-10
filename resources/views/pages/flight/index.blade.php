@@ -181,7 +181,7 @@
                                         <div class="h-8 border border-garuda-black border-dashed"></div>
                                         <p class="text-xs leading-[18px] text-garuda-grey">
                                             {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
-                                            hours
+                                            Hours
                                         </p>
                                         <div class="h-8 border border-garuda-black border-dashed"></div>
                                     </div>
@@ -199,19 +199,29 @@
                                                 class="w-[50px] h-[50px] flex shrink-0" alt="icon">
                                             <div>
                                                 <p class="text-sm text-garuda-grey mt-[2px]">Transit</p>
-                                                <p class="font-semibold">Bangkok (BKK)</p>
+                                                <p class="font-semibold">
+                                                    {{ $flight->segments->skip(1)->first()->airport->name }}
+                                                    ({{ $flight->segments->skip(1)->first()->airport->iata_code }})
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="time flex flex-col items-center w-[83px]">
                                         <div class="h-8 border border-garuda-black border-dashed"></div>
-                                        <p class="text-xs leading-[18px] text-garuda-grey">3 hours</p>
+                                        <p class="text-xs leading-[18px] text-garuda-grey">
+                                            {{ number_format($flight->segments->skip(1)->first()->time->diffInHours($flight->segments->last()->time),0) }}
+                                            Hours
+                                        </p>
                                         <div class="h-8 border border-garuda-black border-dashed"></div>
                                     </div>
                                     <div class="arrival flex items-center gap-5">
                                         <div class="text-center w-[83px]">
-                                            <p class="font-semibold">12:00</p>
-                                            <p class="text-sm text-garuda-grey mt-[2px]">15 Sep 2024</p>
+                                            <p class="font-semibold">
+                                                {{ $flight->segments->last()->time->format('H:i') }}
+                                            </p>
+                                            <p class="text-sm text-garuda-grey mt-[2px]">
+                                                {{ $flight->segments->last()->time->format('d M Y') }}
+                                            </p>
                                         </div>
                                         <div class="flex items-center gap-4">
                                             <img src="assets/images/icons/arrival.svg"
