@@ -321,7 +321,8 @@
                                     </div>
                                     <div class="arrival flex items-center gap-5">
                                         <div class="text-center w-[83px]">
-                                            <p class="font-semibold">12:00</p>
+                                            <p class="font-semibold">{{ $flight->segments->last()->time->format('H:i') }}
+                                            </p>
                                             <p class="text-sm text-garuda-grey mt-[2px]">15 Sep 2024</p>
                                         </div>
                                         <div class="flex items-center gap-4">
