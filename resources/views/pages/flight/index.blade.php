@@ -238,54 +238,18 @@
                                 </div>
                                 <div
                                     class="grid grid-cols-2 w-[320px] shrink-0 h-fit p-5 gap-y-6 justify-between rounded-[30px] bg-garuda-bg-grey">
-                                    <div class="flex items-center gap-3 even:w-[139px] shrink-0">
-                                        <img src="assets/images/icons/box-black.svg" class="w-6 h-6 flex shrink-0"
-                                            alt="icon">
-                                        <div>
-                                            <p class="font-semibold text-sm">Baggages</p>
-                                            <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3 even:w-[139px] shrink-0">
-                                        <img src="assets/images/icons/video-play-black.svg" class="w-6 h-6 flex shrink-0"
-                                            alt="icon">
-                                        <div>
-                                            <p class="font-semibold text-sm">Entertainment</p>
-                                            <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3 even:w-[139px] shrink-0">
-                                        <img src="assets/images/icons/electricity-black.svg" class="w-6 h-6 flex shrink-0"
-                                            alt="icon">
-                                        <div>
-                                            <p class="font-semibold text-sm">USB C Port</p>
-                                            <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3 even:w-[139px] shrink-0">
-                                        <img src="assets/images/icons/coffee-black.svg" class="w-6 h-6 flex shrink-0"
-                                            alt="icon">
-                                        <div>
-                                            <p class="font-semibold text-sm">Heavy Meals</p>
-                                            <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3 even:w-[139px] shrink-0">
-                                        <img src="assets/images/icons/security-user-black.svg"
-                                            class="w-6 h-6 flex shrink-0" alt="icon">
-                                        <div>
-                                            <p class="font-semibold text-sm">Lifeguard</p>
-                                            <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3 even:w-[139px] shrink-0">
-                                        <img src="assets/images/icons/wifi-black.svg" class="w-6 h-6 flex shrink-0"
-                                            alt="icon">
-                                        <div>
-                                            <p class="font-semibold text-sm">Wi-fi Onboard</p>
-                                            <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
-                                        </div>
-                                    </div>
+                                    @foreach ($flight->classes as $class)
+                                        @foreach ($class->facilities as $facility)
+                                            <div class="flex items-center gap-3 even:w-[139px] shrink-0">
+                                                <img src="{{ asset('storage/' . $facility->image) }}"
+                                                    class="w-6 h-6 flex shrink-0" alt="icon">
+                                                <div>
+                                                    <p class="font-semibold text-sm">{{ $facility->name }}</p>
+                                                    <p class="text-xs leading-[18px] text-garuda-grey">Included</p>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
