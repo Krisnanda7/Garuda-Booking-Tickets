@@ -303,10 +303,8 @@
                                     <div class="departure flex items-center gap-5">
                                         <div class="text-center w-[83px]">
                                             <p class="font-semibold">
-                                                {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
+                                                {{ $flight->segments->first()->time->format('H:i') }}
                                             </p>
-                                            <p class="text-sm text-garuda-grey mt-[2px]">
-                                                {{ $flight->segments->first()->time->format('H:i') }}</p>
                                             <p class="text-sm text-garuda-grey mt-[2px]">
                                                 {{ $flight->segments->last()->time->format('d M Y') }}
                                             </p>
