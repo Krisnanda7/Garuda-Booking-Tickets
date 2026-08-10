@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\TransactionRepositoryInterface;
 use App\Models\FlightClass;
 use App\Models\PromoCode;
+use App\Models\Transaction;
 use App\Models\TransactionPassenger;
 
 class TransactionRepository implements TransactionRepositoryInterface
@@ -119,7 +120,7 @@ class TransactionRepository implements TransactionRepositoryInterface
 
     //function untuk get transaction data based on booking code
     //artinya digunakan untuk verifikasi transaksi apakah transaksi itu ada atau tidak
-    public function getTransactionByCode($code, $email, $phone)
+    public function getTransactionByCode($code)
     {
         return Transaction::where('code', $code)->first();
     }
