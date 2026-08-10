@@ -313,7 +313,10 @@
                                     </div>
                                     <div class="time flex flex-col items-center w-[83px]">
                                         <div class="h-8 border border-garuda-black border-dashed"></div>
-                                        <p class="text-xs leading-[18px] text-garuda-grey">3 hours</p>
+                                        <p class="text-xs leading-[18px] text-garuda-grey">
+                                            {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
+                                            Hours
+                                        </p>
                                         <div class="h-8 border border-garuda-black border-dashed"></div>
                                     </div>
                                     <div class="arrival flex items-center gap-5">
