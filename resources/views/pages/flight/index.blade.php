@@ -115,6 +115,8 @@
             </form>
 
 
+
+            {{-- Available Flights Cards --}}
             <div id="Result" class="flex flex-col w-full h-fit rounded-3xl p-5 gap-5 bg-white">
                 <h2 class="font-bold text-xl leading-[30px]">Available Flights</h2>
                 @foreach ($flights as $flight)
@@ -168,7 +170,7 @@
                                                     {{ $segment->time->format('d M Y') }}</p>
                                             </div>
                                             <div class="flex items-center gap-4">
-                                                <img src="assets/images/icons/{{ $loop->first ? 'departure' : ($loop->last ? 'arrival' : 'transit-rounded-black') }}.svg"
+                                                <img src="assets/images/icons/{{ $loop->first ? 'departure' : ($loop->last ? 'arrival' : 'transit-round-black') }}.svg"
                                                     class="w-[50px] h-[50px] flex shrink-0" alt="icon">
                                                 <div>
                                                     <p class="text-sm text-garuda-grey mt-[2px]">
