@@ -310,7 +310,8 @@
                                             <div>
                                                 <p class="text-sm text-garuda-grey mt-[2px]">Departure</p>
                                                 <p class="font-semibold">
-                                                    {{ $flight->segments->first()->airport->iata_code }}
+                                                    {{ $flight->segments->first()->airport->name }}
+                                                    ({{ $flight->segments->first()->airport->iata_code }})
                                                 </p>
                                             </div>
                                         </div>
@@ -337,7 +338,9 @@
                                             <div>
                                                 <p class="text-sm text-garuda-grey mt-[2px]">Arrival</p>
                                                 <p class="font-semibold">
-                                                    {{ $flight->segments->last()->airport->iata_code }}</p>
+                                                    {{ $flight->segments->first()->airport->name }}
+                                                    ({{ $flight->segments->last()->airport->iata_code }})
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
