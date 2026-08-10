@@ -295,15 +295,19 @@
                                 <div class="left-content flex flex-col gap-[10px]">
                                     <div class="departure flex items-center gap-5">
                                         <div class="text-center w-[83px]">
-                                            <p class="font-semibold">08:30</p>
-                                            <p class="text-sm text-garuda-grey mt-[2px]">15 Sep 2024</p>
+                                            <p class="font-semibold">
+                                                {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
+                                            </p>
+                                            <p class="text-sm text-garuda-grey mt-[2px]">
+                                                {{ $flight->segments->first()->time->format('H:i') }}</p>
                                         </div>
                                         <div class="flex items-center gap-4">
                                             <img src="assets/images/icons/departure.svg"
                                                 class="w-[50px] h-[50px] flex shrink-0" alt="icon">
                                             <div>
                                                 <p class="text-sm text-garuda-grey mt-[2px]">Departure</p>
-                                                <p class="font-semibold">Jakarta (CGK)</p>
+                                                <p class="font-semibold">
+                                                    {{ $flight->segments->first()->airport->iata_code }}</p>
                                             </div>
                                         </div>
                                     </div>
