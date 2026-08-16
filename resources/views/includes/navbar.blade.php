@@ -1,6 +1,6 @@
 <nav class="relative flex justify-center px-[75px] mt-[30px]">
     <div class="flex items-center w-full max-w-[1130px] rounded-[20px] justify-between py-4 px-5 bg-white">
-        <a href="{{ route('pages.home') }}">
+        <a href="{{ route('home') }}">
             <img src="assets/images/logos/logo.svg" class="flex shrink-0 h-10" alt="logo">
         </a>
         <ul class="flex items-center gap-[30px] flex-wrap">
