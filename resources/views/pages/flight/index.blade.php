@@ -12,6 +12,11 @@
                         <p class="text-sm text-garuda-grey">Departure</p>
                         <p class="font-semibold text-lg">{{ request()->departure }}</p>
                     </div>
+                @else
+                    <div class="flex flex-col gap-[2px]">
+                        <p class="text-sm text-garuda-grey">Departure</p>
+                        <p class="font-semibold text-lg">-</p>
+                    </div>
                 @endif
 
                 {{-- arrival filter --}}
@@ -19,6 +24,11 @@
                     <div class="flex flex-col gap-[2px]">
                         <p class="text-sm text-garuda-grey">Arrival</p>
                         <p class="font-semibold text-lg">{{ request()->arrival }}</p>
+                    </div>
+                @else
+                    <div class="flex flex-col gap-[2px]">
+                        <p class="text-sm text-garuda-grey">Arrival</p>
+                        <p class="font-semibold text-lg">-</p>
                     </div>
                 @endif
 
@@ -28,6 +38,11 @@
                         <p class="text-sm text-garuda-grey">Date</p>
                         <p class="font-semibold text-lg">{{ request()->date }}</p>
                     </div>
+                @else
+                    <div class="flex flex-col gap-[2px]">
+                        <p class="text-sm text-garuda-grey">Date</p>
+                        <p class="font-semibold text-lg">-</p>
+                    </div>
                 @endif
 
                 {{-- quantity filter --}}
@@ -35,6 +50,11 @@
                     <div class="flex flex-col gap-[2px]">
                         <p class="text-sm text-garuda-grey">Quantity</p>
                         <p class="font-semibold text-lg">{{ request()->quantity }} people</p>
+                    </div>
+                @else
+                    <div class="flex flex-col gap-[2px]">
+                        <p class="text-sm text-garuda-grey">Quantity</p>
+                        <p class="font-semibold text-lg">-</p>
                     </div>
                 @endif
             </div>
