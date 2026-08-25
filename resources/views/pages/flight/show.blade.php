@@ -30,6 +30,7 @@
                     </div>
                 </div>
                 <div class="flex justify-between">
+                    {{-- Tanggal Keberangkatan --}}
                     <div>
                         <p class="text-sm text-garuda-grey">Date</p>
                         <p class="font-semibold text-lg">{{ $flight->segments->first()->time->format('d M Y') }}</p>
@@ -47,7 +48,11 @@
                                     class="w-[60px] h-[60px] flex shrink-0" alt="logo">
                                 <div>
                                     <p class="font-semibold">{{ $flight->airline->name }}</p>
-                                    <p class="text-sm text-garuda-grey mt-[2px]">08:30 - 12:00</p>
+                                    {{-- Jam berangkat - jam tiba --}}
+                                    <p class="text-sm text-garuda-grey mt-[2px]">
+                                        {{ $flight->segments->first()->time->format('H:i') }} -
+                                        {{ $flight->segments->last()->time->format('H:i') }}
+                                    </p>
                                 </div>
                             </div>
                             <a href="#"
@@ -63,12 +68,21 @@
                                 </p>
                                 <div class="flex items-center gap-[6px]">
                                     <p class="font-semibold">{{ $flight->segments->first()->airport->iata_code }}</p>
-                                    <img src="{{ asset('assets/images/icons/transit-black.svg') }}" alt="icon">
+                                    @if ($flight->segments->count() > 2)
+                                        <img src="{{ asset('assets/images/icons/transit-black.svg') }}" alt="icon">
+                                    @else
+                                        <img src="{{ asset('assets/images/icons/direct-black.svg') }}" alt="icon">
+                                    @endif
                                     <p class="font-semibold">{{ $flight->segments->last()->airport->iata_code }}</p>
                                 </div>
-                                <p class="text-sm text-garuda-grey">Transit 1x</p>
+                                @if ($flight->segments->count() > 2)
+                                    <p class="text-sm text-garuda-grey">Transit {{ $flight->segments->count() - 2 }} x</p>
+                                @else
+                                    <p class="text-sm text-garuda-grey">Direct Flight</p>
+                                @endif
                             </div>
-                            <p class="font-semibold text-garuda-green text-center">Rp 4.560.341</p>
+                            <p class="font-semibold text-garuda-green text-center">
+                                {{ 'Rp' . number_format($flight->classes->first()->price, 0, ',', '.') }} </p>
                         </div>
                     </div>
                 </div>
