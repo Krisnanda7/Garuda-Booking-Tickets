@@ -43,8 +43,8 @@
                     <div class="flex flex-col gap-4">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-[10px]">
-                                <img src="assets/images/logos/ana.svg" class="w-[60px] h-[60px] flex shrink-0"
-                                    alt="logo">
+                                <img src="{{ asset('storage/' . $flight->airline->logo) }}"
+                                    class="w-[60px] h-[60px] flex shrink-0" alt="logo">
                                 <div>
                                     <p class="font-semibold">Angga Air</p>
                                     <p class="text-sm text-garuda-grey mt-[2px]">08:30 - 12:00</p>
@@ -60,7 +60,7 @@
                                 <p class="text-sm text-garuda-grey">12 hours</p>
                                 <div class="flex items-center gap-[6px]">
                                     <p class="font-semibold">CGK</p>
-                                    <img src="assets/images/icons/transit-black.svg" alt="icon">
+                                    <img src="{{ asset('assets/images/icons/transit-black.svg') }}" alt="icon">
                                     <p class="font-semibold">HND</p>
                                 </div>
                                 <p class="text-sm text-garuda-grey">Transit 1x</p>
