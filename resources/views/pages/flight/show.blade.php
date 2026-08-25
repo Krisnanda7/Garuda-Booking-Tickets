@@ -3,15 +3,16 @@
 @section('include')
     <div id="Background"
         class="absolute top-0 w-full h-[810px] bg-[linear-gradient(180deg,#85C8FF_0%,#D4D1FE_47.05%,#F3F6FD_100%)]">
-        <img src="assets/images/backgrounds/Jumbo Jet Sky (1) 1.png"
+        <img src="{{ asset('assets/images/backgrounds/Jumbo Jet Sky (1) 1.png') }}"
             class="absolute right-0 top-[147px] object-contain max-h-[481px]" alt="background image">
     </div>
 @endsection
 
 @section('content')
     <main class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[50px] mb-[62px]">
-        <a href="available-flights.html" class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
-            <img src="assets/images/icons/arrow-left-white.svg" class="w-6 h-6" alt="icon">
+        <a href="{{ route('flight.index') }}"
+            class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
+            <img src="{{ asset('assets/images/icons/arrow-left-white.svg') }}" class="w-6 h-6" alt="icon">
             <p class="font-semibold text-white">Back to Choose Flight</p>
         </a>
         <h1 class="font-extrabold text-[50px] leading-[75px] mt-[30px]">Choose Tiers</h1>
@@ -20,18 +21,18 @@
                 <h2 class="font-bold text-xl leading-[30px]">Your Flight</h2>
                 <div class="flex justify-between">
                     <div>
-                        <p class="text-sm text-garuda-grey">Departure</p>
-                        <p class="font-semibold text-lg">Jakarta (CGK)</p>
+                        <p class="text-sm text-garuda-grey">{{ $flight->segments->first()->airport->name }}</p>
+                        <p class="font-semibold text-lg">{{ $flight->segments->first()->airport->iata_code }}</p>
                     </div>
                     <div class="text-end">
-                        <p class="text-sm text-garuda-grey">Arrival</p>
-                        <p class="font-semibold text-lg">Tokyo (HND)</p>
+                        <p class="text-sm text-garuda-grey">{{ $flight->segments->last()->airport->name }}</p>
+                        <p class="font-semibold text-lg">{{ $flight->segments->last()->airport->iata_code }}</p>
                     </div>
                 </div>
                 <div class="flex justify-between">
                     <div>
                         <p class="text-sm text-garuda-grey">Date</p>
-                        <p class="font-semibold text-lg">15 Sep 2024</p>
+                        <p class="font-semibold text-lg">{{ $flight->segments->first()->time->format('d M Y') }}</p>
                     </div>
                     <div class="text-end">
                         <p class="text-sm text-garuda-grey">Quantity</p>
