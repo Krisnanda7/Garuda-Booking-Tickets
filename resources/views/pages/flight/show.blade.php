@@ -46,7 +46,7 @@
                                 <img src="{{ asset('storage/' . $flight->airline->logo) }}"
                                     class="w-[60px] h-[60px] flex shrink-0" alt="logo">
                                 <div>
-                                    <p class="font-semibold">Angga Air</p>
+                                    <p class="font-semibold">{{ $flight->airline->name }}</p>
                                     <p class="text-sm text-garuda-grey mt-[2px]">08:30 - 12:00</p>
                                 </div>
                             </div>
@@ -57,11 +57,11 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div class="flex flex-col gap-[2px] items-center justify-center">
-                                <p class="text-sm text-garuda-grey">12 hours</p>
+                                <p class="text-sm text-garuda-grey">{{ }}</p>
                                 <div class="flex items-center gap-[6px]">
-                                    <p class="font-semibold">CGK</p>
+                                    <p class="font-semibold">{{ $flight->segments->first()->airport->iata_code }}</p>
                                     <img src="{{ asset('assets/images/icons/transit-black.svg') }}" alt="icon">
-                                    <p class="font-semibold">HND</p>
+                                    <p class="font-semibold">{{ $flight->segments->last()->airport->iata_code }}</p>
                                 </div>
                                 <p class="text-sm text-garuda-grey">Transit 1x</p>
                             </div>
