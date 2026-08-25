@@ -91,17 +91,16 @@
                 @foreach ($flight->classes as $class)
                     <div class="flex flex-col h-fit rounded-[20px] p-5 pb-[30px] gap-5 bg-white">
                         <div class="w-[260px] h-[180px] rounded-[30px] bg-[#D9D9D9] overflow-hidden">
-                            @if ($class->class_type ==== "economy")
-                            <img src="{{ asset('assets/images/thumbnails/economy-seat.png') }}"
-                                class="w-full h-full object-cover" alt="thumbnails">
+                            @if ($class->class_type === 'economy')
+                                <img src="{{ asset('assets/images/thumbnails/economy-seat.png') }}"
+                                    class="w-full h-full object-cover" alt="thumbnails">
                             @else
-                            <img src="{{ asset('assets/images/thumbnails/business-seat.png') }}"
-                                class="w-full h-full object-cover" alt="thumbnails">
+                                <img src="{{ asset('assets/images/thumbnails/business-seat.png') }}"
+                                    class="w-full h-full object-cover" alt="thumbnails">
                             @endif
-                            
                         </div>
                         <div class="flex flex-col gap-1">
-                            <p class="font-semibold text-lg">Economy Class</p>
+                            <p class="font-semibold text-lg">{{ $class->class_type }}</p>
                             <p class="font-extrabold text-[32px] leading-[48px]">Rp 1.560.490</p>
                         </div>
                         <hr class="border-[#E8EFF7]">
