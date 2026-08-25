@@ -91,7 +91,7 @@
                 @foreach ($flight->classes as $class)
                     <div class="flex flex-col h-fit rounded-[20px] p-5 pb-[30px] gap-5 bg-white">
                         <div class="w-[260px] h-[180px] rounded-[30px] bg-[#D9D9D9] overflow-hidden">
-                            @if ($class->class_type === 'economy')
+                            @if ($class->class_type === 'Economy')
                                 <img src="{{ asset('assets/images/thumbnails/economy-seat.png') }}"
                                     class="w-full h-full object-cover" alt="thumbnails">
                             @else
@@ -101,23 +101,18 @@
                         </div>
                         <div class="flex flex-col gap-1">
                             <p class="font-semibold text-lg">{{ $class->class_type }}</p>
-                            <p class="font-extrabold text-[32px] leading-[48px]">Rp 1.560.490</p>
+                            <p class="font-extrabold text-[32px] leading-[48px]">
+                                {{ 'Rp' . number_format($class->price, 0, ',', '.') }}</p>
                         </div>
                         <hr class="border-[#E8EFF7]">
-                        <div class="flex items-center gap-[10px]">
-                            <img src="assets/images/icons/box-black.svg" class="w-6 h-6 flex shrink-0" alt="icon">
-                            <p class="font-semibold">Baggages 10kg</p>
-                        </div>
-                        <div class="flex items-center gap-[10px]">
-                            <img src="assets/images/icons/electricity-black.svg" class="w-6 h-6 flex shrink-0"
-                                alt="icon">
-                            <p class="font-semibold">USB C Port</p>
-                        </div>
-                        <div class="flex items-center gap-[10px]">
-                            <img src="assets/images/icons/security-user-black.svg" class="w-6 h-6 flex shrink-0"
-                                alt="icon">
-                            <p class="font-semibold">Lifeguard</p>
-                        </div>
+                        @foreach ($class->facilities as $facility)
+                            <div class="flex items-center gap-[10px]">
+                                <img src="{{ asset('storage/' . $facility->image) }}" class="w-6 h-6 flex shrink-0"
+                                    alt="icon">
+                                <p class="font-semibold">{{ $facility->name }}</p>
+                            </div>
+                        @endforeach
+
                         <a href="choose-seats-economy.html"
                             class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
                             <span class="font-semibold text-white">Choose</span>
