@@ -53,19 +53,45 @@
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="font-semibold">Angga Air</p>
-                                        <p class="text-sm text-garuda-grey mt-[2px]">08:30 - 12:00</p>
+                                        <p class="font-semibold">{{ $flight->airline->name }}</p>
+                                        <p class="text-sm text-garuda-grey mt-[2px]">
+                                            {{ $flight->segments->first()->time->format('H:i') }} -
+                                            {{ $flight->segments->last()->time->format('H:i') }}
+                                        </p>
                                     </div>
                                     <div class="flex flex-col gap-[2px] items-center justify-center">
-                                        <p class="text-sm text-garuda-grey">12 hours</p>
-                                        <div class="flex items-center gap-[6px]">
-                                            <p class="font-semibold">CGK</p>
-                                            <img src="{{ asset('assets/images/icons/transit-black.svg') }}" alt="icon">
-                                            <p class="font-semibold">HND</p>
+                                        <p class="text-sm text-garuda-grey"></p>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex flex-col gap-[2px] items-center justify-center">
+                                                <p class="text-sm text-garuda-grey">
+                                                    {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
+                                                    Hours
+                                                </p>
+                                                <div class="flex items-center gap-[6px]">
+                                                    <p class="font-semibold">
+                                                        {{ $flight->segments->first()->airport->iata_code }}</p>
+                                                    @if ($flight->segments->count() > 2)
+                                                        <img src="{{ asset('assets/images/icons/transit-black.svg') }}"
+                                                            alt="icon">
+                                                    @else
+                                                        <img src="{{ asset('assets/images/icons/direct-black.svg') }}"
+                                                            alt="icon">
+                                                    @endif
+                                                    <p class="font-semibold">
+                                                        {{ $flight->segments->last()->airport->iata_code }}</p>
+                                                </div>
+                                                @if ($flight->segments->count() > 2)
+                                                    <p class="text-sm text-garuda-grey">Transit
+                                                        {{ $flight->segments->count() - 2 }} x</p>
+                                                @else
+                                                    <p class="text-sm text-garuda-grey">Direct Flight</p>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <p class="text-sm text-garuda-grey">Transit 1x</p>
                                     </div>
-                                    <p class="font-semibold text-garuda-green text-center">Rp 4.560.341</p>
+                                    <p class="font-semibold text-garuda-green text-center">
+                                        {{ 'Rp' . number_format($tier->price, 0, ',', '.') }}
+                                    </p>
                                 </div>
                             </div>
                             <hr class="border-[#E8EFF7]">
@@ -75,8 +101,10 @@
                                         class="w-full h-full object-cover" alt="icon">
                                 </div>
                                 <div>
-                                    <p class="font-bold text-xl leading-[30px]">Economy Class</p>
-                                    <p class="text-garuda-grey mt-1">Rp 1.560.490</p>
+                                    <p class="font-bold text-xl leading-[30px]">{{ $tier->class_type }} Class</p>
+                                    <p class="text-garuda-grey mt-1">
+                                        {{ 'Rp' . number_format($tier->price, 0, ',', '.') }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
