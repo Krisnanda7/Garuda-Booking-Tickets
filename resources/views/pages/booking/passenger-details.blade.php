@@ -10,9 +10,8 @@
 
 @section('content')
     <main class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[50px] mb-[62px]">
-        <a href="choose-seats-economy.html"
-            class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
-            <img src="assets/images/icons/arrow-left-white.svg" class="w-6 h-6" alt="icon">
+        <a href="{{ route('booking.chooseSeat', $flight->flight_number) }}" class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
+            <img src="{{ asset('assets/images/icons/arrow-left-white.svg') }}" class="w-6 h-6" alt="icon">
             <p class="font-semibold text-white">Back to Choose Seats</p>
         </a>
         <h1 class="font-extrabold text-[50px] leading-[75px] mt-[30px]">Passenger Details</h1>
@@ -119,7 +118,9 @@
                         <div class="flex justify-between">
                             <div>
                                 <p class="text-sm text-garuda-grey">Price</p>
-                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">Rp 1.560.490</p>
+                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">
+                                    {{ 'Rp' . number_format($tier->price, 0, ',', '.') }}
+                                </p>
                             </div>
                             <div>
                                 <p class="text-sm text-garuda-grey">Govt. Tax</p>
@@ -127,17 +128,23 @@
                             </div>
                             <div>
                                 <p class="text-sm text-garuda-grey">Sub Total</p>
-                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">Rp 4.849.392</p>
+                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">
+                                    {{ 'Rp' . number_format($tier->price * count($transaction['selected_seats']), 0, ',', '.') }}
+                                </p>
                             </div>
                         </div>
                         <div class="flex justify-between items-center">
                             <div>
                                 <p class="text-sm text-garuda-grey">Total Tax</p>
-                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">Rp 3.560.490</p>
+                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">
+                                    {{ 'Rp' . number_format(count($transaction['selected_seats']) * ($tier->price * 0.11), 0, ',', '.') }}
+                                </p>
                             </div>
                             <div>
                                 <p class="text-sm text-garuda-grey">Grand Total</p>
-                                <p class="font-bold text-2xl leading-9 text-garuda-blue mt-[2px]">Rp 844.849.392</p>
+                                <p class="font-bold text-2xl leading-9 text-garuda-blue mt-[2px]">
+                                    {{ 'Rp' . number_format(count($transaction['selected_seats']) * $tier->price + count($transaction['selected_seats']) * ($tier->price * 0.11), 0, ',', '.') }}
+                                </p>
                             </div>
                         </div>
                     </div>
