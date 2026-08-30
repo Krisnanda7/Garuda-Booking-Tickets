@@ -106,13 +106,14 @@
                             </div>
                             <div>
                                 <p class="text-sm text-garuda-grey">Tiers</p>
-                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">{{ $tier->class_type }}</p>
+                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">
+                                    {{ \Str::ucfirst($tier->class_type) }} Class</p>
                             </div>
                             <div>
                                 <p class="text-sm text-garuda-grey">Seats</p>
                                 <p class="font-semibold text-lg leading-[27px] mt-[2px]">
-                                    {{-- seats based on id --}}
                                     {{ implode(', ', $flight->seats->whereIn('id', $transaction['selected_seats'])->pluck('name')->toArray()) }}
+
                                 </p>
                             </div>
                         </div>

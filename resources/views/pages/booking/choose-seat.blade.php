@@ -191,7 +191,7 @@
                         </div>
                         <div id="Seats-Options" class="flex flex-wrap w-full gap-y-8 gap-x-[14px] ">
                             @foreach ($flight->seats->where('class_type', $tier->class_type) as $seat)
-                                <label
+                                <label data-seat="{{ $seat->name }}" data-seat-id="{{ $seat->id }}"
                                     class="group relative flex w-[55px] h-[52.25px] shrink-0 [&:nth-child(6n+3)]:mr-[46px]">
                                     <input type="checkbox" name="seat"
                                         class="seat-checkbox absolute top-1/2 left-1/2 opacity-0"
