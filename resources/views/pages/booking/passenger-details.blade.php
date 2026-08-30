@@ -106,11 +106,14 @@
                             </div>
                             <div>
                                 <p class="text-sm text-garuda-grey">Tiers</p>
-                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">{{ $tier->name }}</p>
+                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">{{ $tier->class_type }}</p>
                             </div>
                             <div>
                                 <p class="text-sm text-garuda-grey">Seats</p>
-                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">A1, C6, D2</p>
+                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">
+                                    {{-- seats based on id --}}
+                                    {{ implode(', ', $flight->seats->whereIn('id', $transaction['selected_seats'])->pluck('name')->toArray()) }}
+                                </p>
                             </div>
                         </div>
                         <div class="flex justify-between">
@@ -160,7 +163,7 @@
                                 class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
                                 <img src="{{ asset('assets/images/icons/profile-black.svg') }}" class="w-5 flex shrink-0"
                                     alt="icon">
-                                <input type="text" name="" id=""
+                                <input type="text" name="name " id=""
                                     class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
                                     placeholder="Write your complete name">
                             </div>
@@ -171,7 +174,7 @@
                                 class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
                                 <img src="{{ asset('assets/images/icons/sms-black.png') }}" class="w-5 flex shrink-0"
                                     alt="icon">
-                                <input type="email" name="" id=""
+                                <input type="email" name="email" id=""
                                     class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
                                     placeholder="Write your valid email">
                             </div>
@@ -182,7 +185,7 @@
                                 class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
                                 <img src="{{ asset('assets/images/icons/call-black.svg') }}" class="w-5 flex shrink-0"
                                     alt="icon">
-                                <input type="tel" name="" id=""
+                                <input type="tel" name="phone" id=""
                                     class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
                                     placeholder="Write your active number">
                             </div>
@@ -260,7 +263,7 @@
                                     <img src="{{ asset('assets/images/icons/global-black.svg') }}"
                                         class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
                                         alt="icon">
-                                    <select name="" id=""
+                                    <select name="passengers[{{ $loop->index }}][nationality]" id=""
                                         class="appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
                                         <option hidden>Select country region</option>
                                         <option>Singapore</option>
