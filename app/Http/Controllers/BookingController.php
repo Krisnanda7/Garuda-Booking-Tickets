@@ -46,7 +46,11 @@ class BookingController extends Controller
 
     public function passengerDetails(Request $request, $flightNumber)
     {
-        
+        $transaction = $this->transactionRepository->getTransactionDataFromSession();
+        $flight = $this->flightRepository->getFlightByFlightNumber($flightNumber);
+        $tier= $flight->classes->find($transaction['flight_class_id']);
+
+        return view('pages.booking.passenger-details', compact('transaction', 'flight', 'tier'));
     }
 
     public function checkBooking()
