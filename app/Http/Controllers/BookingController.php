@@ -32,6 +32,7 @@ class BookingController extends Controller
     public function chooseSeat(Request $request, $flightNumber)
     {
         $transaction = $this->transactionRepository->getTransactionDataFromSession();
+        $transaction['selected_seats'] = [];
         $flight = $this->flightRepository->getFlightByFlightNumber($flightNumber);
         $tier = $flight->classes->find($transaction['flight_class_id']);
 

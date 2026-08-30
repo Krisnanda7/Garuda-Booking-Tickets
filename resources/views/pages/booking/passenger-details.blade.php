@@ -113,7 +113,6 @@
                                 <p class="text-sm text-garuda-grey">Seats</p>
                                 <p class="font-semibold text-lg leading-[27px] mt-[2px]">
                                     {{ implode(', ', $flight->seats->whereIn('id', $transaction['selected_seats'])->pluck('name')->toArray()) }}
-
                                 </p>
                             </div>
                         </div>
