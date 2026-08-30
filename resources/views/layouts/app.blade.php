@@ -24,7 +24,7 @@
     <script src="{{ asset('assets/js/index.js') }}"></script>
 
 
-    @yield('sctipts')
+    @yield('scripts')
 </body>
 
 </html>

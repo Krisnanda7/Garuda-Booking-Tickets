@@ -133,7 +133,6 @@
                                 <p class="text-sm text-garuda-grey">Seats</p>
                                 <p class="font-semibold text-lg leading-[27px] mt-[2px]" id="selectedSeats">
                                     {{ implode(', ', $flight->seats->whereIn('id', $transaction['selected_seats'])->pluck('name')->toArray()) }}
-
                                 </p>
                             </div>
                         </div>
@@ -225,7 +224,7 @@
     </main>
 @endsection
 
-@section('sctipts')
+@section('scripts')
     <script>
         const basePrice = {{ $tier->price }};
     </script>
