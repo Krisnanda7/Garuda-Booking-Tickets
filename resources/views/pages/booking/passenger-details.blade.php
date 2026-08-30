@@ -38,7 +38,7 @@
                         </div>
                         <div class="text-end">
                             <p class="text-sm text-garuda-grey">Quantity</p>
-                            <p class="font-semibold text-lg">3 people</p>
+                            <p class="font-semibold text-lg">{{ count($transaction['selected_seats']) }} people</p>
                         </div>
                     </div>
                     <div class="flex flex-col rounded-[20px] border border-[#E8EFF7] p-5 gap-5">
@@ -101,11 +101,12 @@
                         <div class="flex justify-between">
                             <div>
                                 <p class="text-sm text-garuda-grey">Quantity</p>
-                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">3 People</p>
+                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">
+                                    {{ count($transaction['selected_seats']) }} People</p>
                             </div>
                             <div>
                                 <p class="text-sm text-garuda-grey">Tiers</p>
-                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">Economy</p>
+                                <p class="font-semibold text-lg leading-[27px] mt-[2px]">{{ $tier->name }}</p>
                             </div>
                             <div>
                                 <p class="text-sm text-garuda-grey">Seats</p>
@@ -189,223 +190,104 @@
                     </div>
                 </div>
                 <!-- for accordions with select input inside, the script was different from the normal accordion -->
-                <div id="Passenger-1"
-                    class="accordion-with-select group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden transition-all duration-300">
-                    <button type="button" class="accordion-btn flex items-center justify-between p-5">
-                        <h2 class="font-bold text-xl leading-[30px]">Passenger 1</h2>
-                        <img src="{{ asset('assets/images/icons/arrow-up-circle-black.svg') }}"
-                            class="arrow w-9 h-8 transition-all duration-300" alt="icon">
-                    </button>
-                    <div class="accordion-content p-5 pt-0 flex flex-col gap-5">
-                        <label class="flex flex-col gap-[10px]">
-                            <p class="font-semibold">Complete Name</p>
-                            <div
-                                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                <img src="{{ asset('assets/images/icons/profile-black.svg') }}" class="w-5 flex shrink-0"
-                                    alt="icon">
-                                <input type="text" name="" id=""
-                                    class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
-                                    placeholder="Write your complete name">
+                @foreach ($transaction['selected_seats'] as $transaction)
+                    <div id="Passenger- {{ $loop->index + 1 }}"
+                        class="accordion-with-select group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden transition-all duration-300">
+                        <button type="button" class="accordion-btn flex items-center justify-between p-5">
+                            <h2 class="font-bold text-xl leading-[30px]">Passenger {{ $loop->index + 1 }}</h2>
+                            <img src="{{ asset('assets/images/icons/arrow-up-circle-black.svg') }}"
+                                class="arrow w-9 h-8 transition-all duration-300" alt="icon">
+                        </button>
+                        <div class="accordion-content p-5 pt-0 flex flex-col gap-5">
+                            <label class="flex flex-col gap-[10px]">
+                                <p class="font-semibold">Complete Name</p>
+                                <div
+                                    class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
+                                    <img src="{{ asset('assets/images/icons/profile-black.svg') }}"
+                                        class="w-5 flex shrink-0" alt="icon">
+                                    <input type="text" name="passengers[{{ $loop->index }}][name]"
+                                        id="passengers[{{ $loop->index }}][name]"
+                                        class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
+                                        placeholder="Write your complete name">
+                                </div>
+                            </label>
+                            <div class="flex flex-col gap-[10px]">
+                                <p class="font-semibold">Date of Birth</p>
+                                <input type="hidden" name="passengers[{{ $loop->index }}][date_of_birth]"
+                                    id="dateOfBirth-{{ $loop->index }}" data-index="{{ $loop->index }}">
+                                <div class="flex items-center gap-[10px]">
+                                    {{-- Day Dropdown --}}
+                                    <label
+                                        class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
+                                        <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
+                                            class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
+                                            alt="icon">
+                                        <select id="day-select-{{ $loop->index }}" name=""
+                                            class="date-select day-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal"
+                                            data-index="{{ $loop->index }}"
+                                            onchange="updateDateOfBirth({{ $loop->index }})">
+                                            <option hidden>DD</option>
+                                        </select>
+                                    </label>
+                                    <label
+                                        class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
+                                        <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
+                                            class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
+                                            alt="icon">
+                                        <select id="" name=""
+                                            class="date-select month-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
+                                            <option hidden>MM</option>
+                                        </select>
+                                    </label>
+                                    <label
+                                        class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
+                                        <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
+                                            class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
+                                            alt="icon">
+                                        <select id="year-select-{{ $loop->index }}" name=""
+                                            class="date-select year-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal"
+                                            data-index="{{ $loop->index }}"
+                                            onchange="updateDateOfBirth({{ $loop->index }})">
+                                            <option hidden>YYYY</option>
+                                        </select>
+                                    </label>
+                                </div>
                             </div>
-                        </label>
-                        <div class="flex flex-col gap-[10px]">
-                            <p class="font-semibold">Date of Birth</p>
-                            <div class="flex items-center gap-[10px]">
-                                <label
+                            <label class="flex flex-col gap-[10px]">
+                                <p class="font-semibold">Nationality</p>
+                                <div
                                     class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                    <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
+                                    <img src="{{ asset('assets/images/icons/global-black.svg') }}"
                                         class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
                                         alt="icon">
-                                    <select id="" name=""
-                                        class="date-select day-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
-                                        <option hidden>DD</option>
+                                    <select name="" id=""
+                                        class="appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
+                                        <option hidden>Select country region</option>
+                                        <option>Singapore</option>
+                                        <option>Japan</option>
+                                        <option>Indonesia</option>
                                     </select>
-                                </label>
-                                <label
-                                    class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                    <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
-                                        class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
-                                        alt="icon">
-                                    <select id="" name=""
-                                        class="date-select month-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
-                                        <option hidden>MM</option>
-                                    </select>
-                                </label>
-                                <label
-                                    class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                    <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
-                                        class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
-                                        alt="icon">
-                                    <select id="" name=""
-                                        class="date-select year-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
-                                        <option hidden>YYYY</option>
-                                    </select>
-                                </label>
-                            </div>
+                                </div>
+                            </label>
                         </div>
-                        <label class="flex flex-col gap-[10px]">
-                            <p class="font-semibold">Nationality</p>
-                            <div
-                                class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                <img src="{{ asset('assets/images/icons/global-black.svg') }}"
-                                    class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
-                                    alt="icon">
-                                <select name="" id=""
-                                    class="appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
-                                    <option hidden>Select country region</option>
-                                    <option>Singapore</option>
-                                    <option>Japan</option>
-                                    <option>Indonesia</option>
-                                </select>
-                            </div>
-                        </label>
                     </div>
-                </div>
-                <div id="Passenger-2"
-                    class="accordion-with-select group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden transition-all duration-300">
-                    <button type="button" class="accordion-btn flex items-center justify-between p-5">
-                        <h2 class="font-bold text-xl leading-[30px]">Passenger 2</h2>
-                        <img src="{{ asset('assets/images/icons/arrow-up-circle-black.svg') }}"
-                            class="arrow w-9 h-8 transition-all duration-300" alt="icon">
-                    </button>
-                    <div class="accordion-content p-5 pt-0 flex flex-col gap-5">
-                        <label class="flex flex-col gap-[10px]">
-                            <p class="font-semibold">Complete Name</p>
-                            <div
-                                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                <img src="{{ asset('assets/images/icons/profile-black.svg') }}" class="w-5 flex shrink-0"
-                                    alt="icon">
-                                <input type="text" name="" id=""
-                                    class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
-                                    placeholder="Write your complete name">
-                            </div>
-                        </label>
-                        <div class="flex flex-col gap-[10px]">
-                            <p class="font-semibold">Date of Birth</p>
-                            <div class="flex items-center gap-[10px]">
-                                <label
-                                    class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                    <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
-                                        class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
-                                        alt="icon">
-                                    <select id="" name=""
-                                        class="date-select day-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
-                                        <option hidden>DD</option>
-                                    </select>
-                                </label>
-                                <label
-                                    class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                    <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
-                                        class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
-                                        alt="icon">
-                                    <select id="" name=""
-                                        class="date-select month-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
-                                        <option hidden>MM</option>
-                                    </select>
-                                </label>
-                                <label
-                                    class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                    <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
-                                        class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
-                                        alt="icon">
-                                    <select id="" name=""
-                                        class="date-select year-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
-                                        <option hidden>YYYY</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </div>
-                        <label class="flex flex-col gap-[10px]">
-                            <p class="font-semibold">Nationality</p>
-                            <div
-                                class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                <img src="{{ asset('assets/images/icons/global-black.svg') }}"
-                                    class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
-                                    alt="icon">
-                                <select name="" id=""
-                                    class="appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
-                                    <option hidden>Select country region</option>
-                                    <option>Singapore</option>
-                                    <option>Japan</option>
-                                    <option>Indonesia</option>
-                                </select>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-                <div id="Passenger-3"
-                    class="accordion-with-select group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden transition-all duration-300">
-                    <button type="button" class="accordion-btn flex items-center justify-between p-5">
-                        <h2 class="font-bold text-xl leading-[30px]">Passenger 3</h2>
-                        <img src="{{ asset('assets/images/icons/arrow-up-circle-black.svg') }}"
-                            class="arrow w-9 h-8 transition-all duration-300" alt="icon">
-                    </button>
-                    <div class="accordion-content p-5 pt-0 flex flex-col gap-5">
-                        <label class="flex flex-col gap-[10px]">
-                            <p class="font-semibold">Complete Name</p>
-                            <div
-                                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                <img src="{{ asset('assets/images/icons/profile-black.svg') }}" class="w-5 flex shrink-0"
-                                    alt="icon">
-                                <input type="text" name="" id=""
-                                    class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
-                                    placeholder="Write your complete name">
-                            </div>
-                        </label>
-                        <div class="flex flex-col gap-[10px]">
-                            <p class="font-semibold">Date of Birth</p>
-                            <div class="flex items-center gap-[10px]">
-                                <label
-                                    class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                    <img src="assets/images/icons/note-add-black.svg"
-                                        class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
-                                        alt="icon">
-                                    <select id="" name=""
-                                        class="date-select day-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
-                                        <option hidden>DD</option>
-                                    </select>
-                                </label>
-                                <label
-                                    class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                    <img src="assets/images/icons/note-add-black.svg"
-                                        class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
-                                        alt="icon">
-                                    <select id="" name=""
-                                        class="date-select month-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
-                                        <option hidden>MM</option>
-                                    </select>
-                                </label>
-                                <label
-                                    class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                    <img src="assets/images/icons/note-add-black.svg"
-                                        class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
-                                        alt="icon">
-                                    <select id="" name=""
-                                        class="date-select year-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
-                                        <option hidden>YYYY</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </div>
-                        <label class="flex flex-col gap-[10px]">
-                            <p class="font-semibold">Nationality</p>
-                            <div
-                                class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                <img src="assets/images/icons/global-black.svg"
-                                    class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
-                                    alt="icon">
-                                <select name="" id=""
-                                    class="appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
-                                    <option hidden>Select country region</option>
-                                    <option>Singapore</option>
-                                    <option>Japan</option>
-                                    <option>Indonesia</option>
-                                </select>
-                            </div>
-                        </label>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </form>
     </main>
+@endsection
+
+@section('scripts')
+    <script>
+        function updateDateOfBirth(index) {
+            const day = document.getElementById('day-select-' + index).value;
+            const month = document.getElementById('month-select-' + index).value;
+            const year = document.getElementById('year-select-' + index).value;
+
+            if (day && month && year) {
+                document.getElementById('dateOfBirth-' + index).value = `${year}-${month}-${day}`;
+            }
+        }
+    </script>
 @endsection
