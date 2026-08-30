@@ -168,7 +168,7 @@
                     <img id="Plane-Windshield" src="{{ asset('assets/images/backgrounds/plane-windshield.svg') }}"
                         class="absolute top-16 w-full object-contain px-[56px]" alt="image">
                     <form action="passenger-details.html" class="relative px-[56px] pb-[60px]" id="form-seat">
-                        <p class="text-center font-bold text-xl leading-[30px]">Economy Class</p>
+                        <p class="text-center font-bold text-xl leading-[30px]">{{ $tier->class_type }} Class</p>
                         <div id="Legend" class="flex items-center justify-center mb-[30px] gap-5 mt-5">
                             <div class="flex items-center gap-[6px]">
                                 <span class="w-4 h-4 flex shrink-0 rounded-[6px] bg-white border border-[#FFA44B]"></span>
