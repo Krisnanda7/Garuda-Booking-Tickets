@@ -217,3 +217,10 @@
         </div>
     </main>
 @endsection
+
+@section('sctipts')
+    <script>
+        const basePrice = {{ $tier->price }};
+    </script>
+    <script src="{{ asset('assets/js/chose-seat.js') }}"></script>
+@endsection
