@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePassengerDetailRequest;
 use App\Interfaces\FlightRepositoryInterface;
 use App\Interfaces\TransactionRepositoryInterface;
 use Illuminate\Http\Request;
@@ -55,7 +56,7 @@ class BookingController extends Controller
         return view('pages.booking.passenger-details', compact('transaction', 'flight', 'tier'));
     }
 
-    public function savePassengerDetails(Request $request, $flightNumber)
+    public function savePassengerDetails(StorePassengerDetailRequest $request, $flightNumber)
     {
         $this->transactionRepository->saveTransactionDataToSession($request->all());
     }
