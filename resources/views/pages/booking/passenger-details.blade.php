@@ -170,42 +170,64 @@
                         <label class="flex flex-col gap-[10px]">
                             <p class="font-semibold">Complete Name</p>
                             <div
-                                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
+                                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
+                                @error('name')
+                                    border-red-500
+                                @enderror">
                                 <img src="{{ asset('assets/images/icons/profile-black.svg') }}" class="w-5 flex shrink-0"
                                     alt="icon">
                                 <input type="text" name="name " id=""
                                     class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
                                     placeholder="Write your complete name">
                             </div>
+                            @error('name')
+                                <p class="text-red-500">{{ $message }}</p>
+                            @enderror
                         </label>
                         <label class="flex flex-col gap-[10px]">
                             <p class="font-semibold">Email Address</p>
                             <div
-                                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
+                                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
+                                @error('email')
+                                    border-red-500
+                                @enderror">
                                 <img src="{{ asset('assets/images/icons/sms-black.png') }}" class="w-5 flex shrink-0"
                                     alt="icon">
                                 <input type="email" name="email" id=""
                                     class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
                                     placeholder="Write your valid email">
                             </div>
+                            @error('email')
+                                <p class="text-red-500">{{ $message }}</p>
+                            @enderror
                         </label>
                         <label class="flex flex-col gap-[10px]">
                             <p class="font-semibold">Phone No.</p>
                             <div
-                                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
+                                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
+                                @error('phone')
+                                    border-red-500
+                                @enderror">
+
                                 <img src="{{ asset('assets/images/icons/call-black.svg') }}" class="w-5 flex shrink-0"
                                     alt="icon">
                                 <input type="tel" name="phone" id=""
                                     class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
                                     placeholder="Write your active number">
                             </div>
+                            @error('phone')
+                                <p class="text-red-500">{{ $message }}</p>
+                            @enderror
                         </label>
                     </div>
                 </div>
                 <!-- for accordions with select input inside, the script was different from the normal accordion -->
                 @foreach ($transaction['selected_seats'] as $transaction)
                     <div id="Passenger- {{ $loop->index + 1 }}"
-                        class="accordion-with-select group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden transition-all duration-300">
+                        class="accordion-with-select group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden transition-all duration-300
+                        @error('passenger.' . $loop->index . '.name')
+                            border-red-500
+                        @enderror">
                         <button type="button" class="accordion-btn flex items-center justify-between p-5">
                             <h2 class="font-bold text-xl leading-[30px]">Passenger {{ $loop->index + 1 }}</h2>
                             <img src="{{ asset('assets/images/icons/arrow-up-circle-black.svg') }}"
@@ -223,6 +245,10 @@
                                         class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
                                         placeholder="Write your complete name">
                                 </div>
+                                @error('passenger.' . $loop->index . '.name')
+                                    <p class="text-red-500">{{ $message }}</p>
+                                @enderror
+
                             </label>
                             <div class="flex flex-col gap-[10px]">
                                 <p class="font-semibold">Date of Birth</p>
@@ -231,7 +257,10 @@
                                 <div class="flex items-center gap-[10px]">
                                     {{-- Day Dropdown --}}
                                     <label
-                                        class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
+                                        class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
+                                        @error('passenger.' . $loop->index . '.date_of_birth')
+                                            border-red-500
+                                        @enderror">
                                         <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
                                             class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
                                             alt="icon">
@@ -241,9 +270,15 @@
                                             onchange="updateDateOfBirth({{ $loop->index }})">
                                             <option hidden>DD</option>
                                         </select>
+                                        @error('passenger.' . $loop->index . '.date_of_birth')
+                                            <p class="text-red-500">{{ $message }}</p>
+                                        @enderror
                                     </label>
                                     <label
-                                        class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
+                                        class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
+                                        @error('passenger.' . $loop->index . '.month_of_birth')
+                                            border-red-500
+                                        @enderror">
                                         <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
                                             class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
                                             alt="icon">
@@ -253,9 +288,15 @@
                                             onchange="updateDateOfBirth({{ $loop->index }})">
                                             <option hidden>MM</option>
                                         </select>
+                                        @error('passenger.' . $loop->index . '.month_of_birth')
+                                            <p class="text-red-500">{{ $message }}</p>
+                                        @enderror
                                     </label>
                                     <label
-                                        class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
+                                        class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
+                                        @error('passenger.' . $loop->index . '.year_of_birth')
+                                            border-red-500
+                                        @enderror">
                                         <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
                                             class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
                                             alt="icon">
@@ -265,13 +306,19 @@
                                             onchange="updateDateOfBirth({{ $loop->index }})">
                                             <option hidden>YYYY</option>
                                         </select>
+                                        @error('passenger.' . $loop->index . '.year_of_birth')
+                                            <p class="text-red-500">{{ $message }}</p>
+                                        @enderror
                                     </label>
                                 </div>
                             </div>
                             <label class="flex flex-col gap-[10px]">
                                 <p class="font-semibold">Nationality</p>
                                 <div
-                                    class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
+                                    class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
+                                    @error('passenger.' . $loop->index . '.nationality')
+                                        border-red-500
+                                    @enderror">
                                     <img src="{{ asset('assets/images/icons/global-black.svg') }}"
                                         class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
                                         alt="icon">
@@ -282,6 +329,9 @@
                                         <option>Japan</option>
                                         <option>Indonesia</option>
                                     </select>
+                                    @error('passenger.' . $loop->index . '.nationality')
+                                        <p class="text-red-500">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </label>
                         </div>
@@ -296,19 +346,54 @@
 @section('scripts')
     <script>
         function populateDateSelects() {
-            const months = [
-                { value: '01', label: 'January' },
-                { value: '02', label: 'February' },
-                { value: '03', label: 'March' },
-                { value: '04', label: 'April' },
-                { value: '05', label: 'May' },
-                { value: '06', label: 'June' },
-                { value: '07', label: 'July' },
-                { value: '08', label: 'August' },
-                { value: '09', label: 'September' },
-                { value: '10', label: 'October' },
-                { value: '11', label: 'November' },
-                { value: '12', label: 'December' },
+            const months = [{
+                    value: '01',
+                    label: 'January'
+                },
+                {
+                    value: '02',
+                    label: 'February'
+                },
+                {
+                    value: '03',
+                    label: 'March'
+                },
+                {
+                    value: '04',
+                    label: 'April'
+                },
+                {
+                    value: '05',
+                    label: 'May'
+                },
+                {
+                    value: '06',
+                    label: 'June'
+                },
+                {
+                    value: '07',
+                    label: 'July'
+                },
+                {
+                    value: '08',
+                    label: 'August'
+                },
+                {
+                    value: '09',
+                    label: 'September'
+                },
+                {
+                    value: '10',
+                    label: 'October'
+                },
+                {
+                    value: '11',
+                    label: 'November'
+                },
+                {
+                    value: '12',
+                    label: 'December'
+                },
             ];
 
             const currentYear = new Date().getFullYear();
