@@ -225,7 +225,7 @@
                 @foreach ($transaction['selected_seats'] as $transaction)
                     <div id="Passenger- {{ $loop->index + 1 }}"
                         class="accordion-with-select group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden transition-all duration-300
-                        @error('passenger.' . $loop->index . '.name')
+                        @error('passengers.' . $loop->index . '.name')
                             border-red-500
                         @enderror">
                         <button type="button" class="accordion-btn flex items-center justify-between p-5">
@@ -245,7 +245,7 @@
                                         class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
                                         placeholder="Write your complete name">
                                 </div>
-                                @error('passenger.' . $loop->index . '.name')
+                                @error('passengers.' . $loop->index . '.name')
                                     <p class="text-red-500">{{ $message }}</p>
                                 @enderror
 
@@ -258,7 +258,7 @@
                                     {{-- Day Dropdown --}}
                                     <label
                                         class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
-                                        @error('passenger.' . $loop->index . '.date_of_birth')
+                                        @error('passengers.' . $loop->index . '.date_of_birth')
                                             border-red-500
                                         @enderror">
                                         <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
@@ -270,13 +270,13 @@
                                             onchange="updateDateOfBirth({{ $loop->index }})">
                                             <option hidden>DD</option>
                                         </select>
-                                        @error('passenger.' . $loop->index . '.date_of_birth')
+                                        @error('passengers.' . $loop->index . '.date_of_birth')
                                             <p class="text-red-500">{{ $message }}</p>
                                         @enderror
                                     </label>
                                     <label
                                         class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
-                                        @error('passenger.' . $loop->index . '.month_of_birth')
+                                        @error('passengers.' . $loop->index . '.month_of_birth')
                                             border-red-500
                                         @enderror">
                                         <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
@@ -288,13 +288,13 @@
                                             onchange="updateDateOfBirth({{ $loop->index }})">
                                             <option hidden>MM</option>
                                         </select>
-                                        @error('passenger.' . $loop->index . '.month_of_birth')
+                                        @error('passengers.' . $loop->index . '.month_of_birth')
                                             <p class="text-red-500">{{ $message }}</p>
                                         @enderror
                                     </label>
                                     <label
                                         class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
-                                        @error('passenger.' . $loop->index . '.year_of_birth')
+                                        @error('passengers.' . $loop->index . '.year_of_birth')
                                             border-red-500
                                         @enderror">
                                         <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
@@ -306,7 +306,7 @@
                                             onchange="updateDateOfBirth({{ $loop->index }})">
                                             <option hidden>YYYY</option>
                                         </select>
-                                        @error('passenger.' . $loop->index . '.year_of_birth')
+                                        @error('passengers.' . $loop->index . '.year_of_birth')
                                             <p class="text-red-500">{{ $message }}</p>
                                         @enderror
                                     </label>
@@ -316,7 +316,7 @@
                                 <p class="font-semibold">Nationality</p>
                                 <div
                                     class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
-                                    @error('passenger.' . $loop->index . '.nationality')
+                                    @error('passengers.' . $loop->index . '.nationality')
                                         border-red-500
                                     @enderror">
                                     <img src="{{ asset('assets/images/icons/global-black.svg') }}"
@@ -329,7 +329,7 @@
                                         <option>Japan</option>
                                         <option>Indonesia</option>
                                     </select>
-                                    @error('passenger.' . $loop->index . '.nationality')
+                                    @error('passengers.' . $loop->index . '.nationality')
                                         <p class="text-red-500">{{ $message }}</p>
                                     @enderror
                                 </div>

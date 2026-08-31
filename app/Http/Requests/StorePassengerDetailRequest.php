@@ -26,28 +26,28 @@ class StorePassengerDetailRequest extends FormRequest
             'name' => 'required',
             'email' => 'required',
             'phone' => 'required',
-            'passenger' => 'required|array|min:1',
-            'passenger.*.name' => 'required',
-            'passenger.*.date_of_birth' => 'required',
-            'passenger.*.nationality' => 'required',
+            'passengers' => 'required|array|min:1',
+            'passengers.*.name' => 'required',
+            'passengers.*.date_of_birth' => 'required',
+            'passengers.*.nationality' => 'required',
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'passenger.*.name' => 'name',
-            'passenger.*.date_of_birth' => 'date of birth',
-            'passenger.*.nationality' => 'nationality',
+            'passengers.*.name' => 'name',
+            'passengers.*.date_of_birth' => 'date of birth',
+            'passengers.*.nationality' => 'nationality',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'passenger.*.name.required' => ':attribute is required',
-            'passenger.*.date_of_birth.required' => ':attribute is required',
-            'passenger.*.nationality.required' => ':attribute is required',
+            'passengers.*.name.required' => ':attribute is required',
+            'passengers.*.date_of_birth.required' => ':attribute is required',
+            'passengers.*.nationality.required' => ':attribute is required',
         ];
     }
 }
