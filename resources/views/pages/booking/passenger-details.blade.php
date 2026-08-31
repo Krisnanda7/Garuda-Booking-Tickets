@@ -10,12 +10,15 @@
 
 @section('content')
     <main class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[50px] mb-[62px]">
-        <a href="{{ route('booking.chooseSeat', $flight->flight_number) }}" class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
+        <a href="{{ route('booking.chooseSeat', $flight->flight_number) }}"
+            class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
             <img src="{{ asset('assets/images/icons/arrow-left-white.svg') }}" class="w-6 h-6" alt="icon">
             <p class="font-semibold text-white">Back to Choose Seats</p>
         </a>
         <h1 class="font-extrabold text-[50px] leading-[75px] mt-[30px]">Passenger Details</h1>
-        <form action="checkout.html" class="flex gap-[30px] mt-[30px]">
+        <form action="{{ route('booking.savePassengerDetails', $flight->flight_number) }}" class="flex gap-[30px] mt-[30px]"
+            method="POST">
+            @csrf
             <div id="Left-Content" class="flex flex-col gap-[30px] w-[470px] shrink-0">
                 <div id="Flight-Info" class="flex flex-col w-[470px] shrink-0 h-fit rounded-[20px] bg-white p-5 gap-5">
                     <h2 class="font-bold text-xl leading-[30px]">Your Flight</h2>
