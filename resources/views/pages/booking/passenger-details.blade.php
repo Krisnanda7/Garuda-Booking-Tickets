@@ -247,8 +247,10 @@
                                         <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
                                             class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0"
                                             alt="icon">
-                                        <select id="" name=""
-                                            class="date-select month-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal">
+                                        <select id="month-select-{{ $loop->index }}" name=""
+                                            class="date-select month-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal"
+                                            data-index="{{ $loop->index }}"
+                                            onchange="updateDateOfBirth({{ $loop->index }})">
                                             <option hidden>MM</option>
                                         </select>
                                     </label>
@@ -293,6 +295,52 @@
 
 @section('scripts')
     <script>
+        function populateDateSelects() {
+            const months = [
+                { value: '01', label: 'January' },
+                { value: '02', label: 'February' },
+                { value: '03', label: 'March' },
+                { value: '04', label: 'April' },
+                { value: '05', label: 'May' },
+                { value: '06', label: 'June' },
+                { value: '07', label: 'July' },
+                { value: '08', label: 'August' },
+                { value: '09', label: 'September' },
+                { value: '10', label: 'October' },
+                { value: '11', label: 'November' },
+                { value: '12', label: 'December' },
+            ];
+
+            const currentYear = new Date().getFullYear();
+
+            document.querySelectorAll('.day-select').forEach(select => {
+                for (let d = 1; d <= 31; d++) {
+                    const opt = document.createElement('option');
+                    opt.value = String(d).padStart(2, '0');
+                    opt.textContent = String(d).padStart(2, '0');
+                    select.appendChild(opt);
+                }
+            });
+
+            document.querySelectorAll('.month-select').forEach(select => {
+                months.forEach(m => {
+                    const opt = document.createElement('option');
+                    opt.value = m.value;
+                    opt.textContent = m.label;
+                    select.appendChild(opt);
+                });
+            });
+
+            document.querySelectorAll('.year-select').forEach(select => {
+                for (let y = currentYear; y >= 1900; y--) {
+                    const opt = document.createElement('option');
+                    opt.value = y;
+                    opt.textContent = y;
+                    select.appendChild(opt);
+                }
+            });
+        }
+
         function updateDateOfBirth(index) {
             const day = document.getElementById('day-select-' + index).value;
             const month = document.getElementById('month-select-' + index).value;
@@ -302,5 +350,7 @@
                 document.getElementById('dateOfBirth-' + index).value = `${year}-${month}-${day}`;
             }
         }
+
+        document.addEventListener('DOMContentLoaded', populateDateSelects);
     </script>
 @endsection

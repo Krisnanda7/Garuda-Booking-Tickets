@@ -56,7 +56,7 @@ class BookingController extends Controller
         return view('pages.booking.passenger-details', compact('transaction', 'flight', 'tier'));
     }
 
-    public function savePassengerDetails(StorePassengerDetailRequest $request, $flightNumber)
+    public function savePassengerDetails(Request $request, $flightNumber)
     {
         $this->transactionRepository->saveTransactionDataToSession($request->all());
     }
