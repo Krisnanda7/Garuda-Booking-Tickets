@@ -58,8 +58,8 @@ class BookingController extends Controller
 
     public function savePassengerDetails(StorePassengerDetailRequest $request, $flightNumber)
     {
-        $this->transactionRepository->saveTransactionDataToSession($request->all());
 
+        $this->transactionRepository->saveTransactionDataToSession($request->all());
         return redirect()->route('booking.passengerDetails', ['flightNumber' => $flightNumber]);
     }
 
